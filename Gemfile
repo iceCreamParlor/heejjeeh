@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.4.2'
 
+################################## Customization ##################################
 #Active Admin
 gem 'activeadmin'
 #devise
@@ -11,6 +12,11 @@ gem 'devise'
 gem 'webpacker', '~> 3.5'
 #Postgres database
 gem 'pg'
+
+
+# gem 'carrierwave', '~> 1.0'
+################################## Customization ##################################
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use sqlite3 as the database for Active Record

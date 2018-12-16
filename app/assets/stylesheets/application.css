@@ -13,5 +13,6 @@
  
  *= require_self
  */
-
- 
+.modal-content {
+  background-color: #2A373E;
+}

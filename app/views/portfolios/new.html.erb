@@ -1,5 +1,40 @@
 <h1>New Portfolio</h1>
 
-<%= render 'form', portfolio: @portfolio %>
+<div class="input-field col s12">
+    <div class="editor"><h2 id="title">The Art of War</h2>
+        <p>
+        If you know the enemy and know yourself, you need not fear the result of a hundred battles.<br> If you know yourself but not the enemy, for every victory gained you will also suffer a defeat.<br>
+        If you know neither the enemy nor yourself, you will succumb in every battle.<br><br>
+
+        </p>
+    </div>
+</div>
+  
+<%#= render 'form', portfolio: @portfolio %>
 
 <%= link_to 'Back', portfolios_path %>
+
+<!-- <script src="/js/editor/materialize.js"></script> -->
+<!-- <script type="text/javascript">
+document.addEventListener('turbolinks:load', function(){
+  console.log("!!!")
+  var toolbar = [
+      ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough', 'clear']],
+      ['fonts', ['fontsize', 'fontname']],
+      ['color', ['color']],
+      ['undo', ['undo', 'redo', 'help']],
+      ['ckMedia', ['ckImageUploader', 'ckVideoEmbeeder']],
+      ['misc', ['link', 'picture', 'table', 'hr', 'codeview', 'fullscreen']],
+      ['para', ['ul', 'ol', 'paragraph', 'leftButton', 'centerButton', 'rightButton', 'justifyButton', 'outdentButton', 'indentButton']],
+      ['height', ['lineheight']],
+  ];
+
+  $('.editor').summernote({
+      toolbar: toolbar,
+      height: 550,
+      minHeight: 100,
+      defaultBackColor: '#fff'
+  });
+}) -->
+  
+</script> 

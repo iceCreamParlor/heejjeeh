@@ -112,5 +112,13 @@
       inDuration: 500,
     });
 
+    $(document).ready(function(){
+      $('.modal').modal({
+        opacity: 0.7
+        
+      });
+    });
+  
   }); // end of document ready
+
 })(jQuery); // end of jQuery name space
