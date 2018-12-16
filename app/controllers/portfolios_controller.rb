@@ -1,6 +1,7 @@
 class PortfoliosController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
-
+  
   # GET /portfolios
   # GET /portfolios.json
   def index
@@ -15,6 +16,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/new
   def new
     @portfolio = Portfolio.new
+    @disable_carousel = true
   end
 
   # GET /portfolios/1/edit
@@ -28,7 +30,7 @@ class PortfoliosController < ApplicationController
 
     respond_to do |format|
       if @portfolio.save
-        format.html { redirect_to @portfolio, notice: 'Portfolio was successfully created.' }
+        format.html { redirect_to '/', notice: 'Portfolio was successfully created.' }
         format.json { render :show, status: :created, location: @portfolio }
       else
         format.html { render :new }
