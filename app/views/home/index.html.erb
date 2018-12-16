@@ -2,94 +2,54 @@
 <div id="portfolio" class="section gray">
   <div class="gallery row">
     <% @portfolios.each do |portfolio| %>
-    <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter swift">
-      <div class="gallery-curve-wrapper">
-        <a class="gallery-cover gray">
-          <img class="responsive-img" src="http://placehold.it/300x200" alt="placeholder">
-        </a>
-        <div class="gallery-body">
-          <div class="title-wrapper">
-            <h3><%= portfolio.title %></h3>
-          </div>
-          <div class="content">
-            <%= portfolio.content.html_safe %>
-          </div>
+      <% portfolio.hashtags.each do |hashtag| %>
+        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <%= hashtag.title %>">
+          <div class="gallery-curve-wrapper">
+            <a class="gallery-cover gray">
+              <img class="responsive-img" src="http://placehold.it/300x200" alt="placeholder">
+            </a>
+            <div class="gallery-body">
+              <div class="title-wrapper">
+                <h3><%= portfolio.title %></h3>
+              </div>
+              <div class="content">
+                <%= portfolio.content.html_safe %>
+              </div>
 
-          <div class="carousel-wrapper">
-            <div class="carousel">
-              <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
-              <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
-              <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
-              <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
-              <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+              <div class="carousel-wrapper">
+                <div class="carousel">
+                  <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                  <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                  <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                  <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                  <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+                </div>
+              </div>
+            </div>
+            <div class="gallery-action">
+              <% if check_authority %>
+                <%= link_to edit_portfolio_path(portfolio.id), class: "btn-floating btn-large waves-effect waves-light" do %>
+                  <i class="material-icons">edit</i>
+                <% end %>
+              <% else %>
+                <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertNoAuthority()">
+                  <i class="material-icons">edit</i>
+                </a>
+              <% end %>
+
+              <% if check_authority %>
+                <%= link_to portfolio_path(portfolio.id), method: :delete, class: "btn-floating btn-large waves-effect waves-light" do %>
+                  <i class="material-icons">delete_forever</i>
+                <% end %>
+              <% else %>
+                <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertNoAuthority()">
+                  <i class="material-icons">delete_forever</i>
+                </a>
+              <% end %>
             </div>
           </div>
         </div>
-        <div class="gallery-action">
-          <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">favorite</i></a>
-        </div>
-      </div>
-    </div>
+      <% end %>
     <% end %>
-    <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter django">
-      <div class="gallery-curve-wrapper">
-        <a class="gallery-cover gray">
-          <img src="http://placehold.it/300x250" alt="placeholder">
-        </a>
-        <div class="gallery-body">
-          <div class="title-wrapper">
-            <h3>Sun</h3>
-            <span class="price">$9.99</span>
-          </div>
-          <p class="description">
-Literally venmo before they sold out, DIY heirloom forage polaroid offal yr pop-up selfies health goth. Typewriter scenester hammock truffaut meditation, squid before they sold out polaroid portland tousled taxidermy vice. Listicle butcher thundercats, taxidermy pitchfork next level roof party crucifix narwhal kinfolk you probably haven't heard of them portland small batch.</p>
-          <p class="description">
-Ea salvia adipisicing vegan man bun. Flexitarian cupidatat skateboard flannel. Drinking vinegar marfa you probably haven't heard of them consequat post-ironic, shabby chic williamsburg raclette vaporware readymade selfies brunch. Venmo selvage biodiesel marfa. Tbh literally 3 wolf moon, proident elit raclette chambray consequat edison bulb four loko accusamus. Semiotics godard eiusmod, ex esse air plant quinoa vaporware selfies keytar. Actually yuccie ennui flannel single-origin coffee, williamsburg cardigan banjo forage pug distillery tumblr hexagon vinyl occaecat.</p>
-
-          <div class="carousel-wrapper">
-              <div class="carousel">
-                <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
-              </div>
-            </div>
-        </div>
-        <div class="gallery-action">
-          <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">favorite</i></a>
-        </div>
-      </div>
-    </div>
-    <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter rails">
-      <div class="gallery-curve-wrapper">
-        <a class="gallery-cover gray">
-          <img class="responsive-img" src="http://placehold.it/300x280" alt="placeholder">
-        </a>
-        <div class="gallery-body">
-          <div class="title-wrapper">
-            <h3>Big Bang 1</h3>
-            <span class="price">$23.99</span>
-          </div>
-          <p class="description">
-Literally venmo before they sold out, DIY heirloom forage polaroid offal yr pop-up selfies health goth. Typewriter scenester hammock truffaut meditation, squid before they sold out polaroid portland tousled taxidermy vice. Listicle butcher thundercats, taxidermy pitchfork next level roof party crucifix narwhal kinfolk you probably haven't heard of them portland small batch.</p>
-          <p class="description">
-Ea salvia adipisicing vegan man bun. Flexitarian cupidatat skateboard flannel. Drinking vinegar marfa you probably haven't heard of them consequat post-ironic, shabby chic williamsburg raclette vaporware readymade selfies brunch. Venmo selvage biodiesel marfa. Tbh literally 3 wolf moon, proident elit raclette chambray consequat edison bulb four loko accusamus. Semiotics godard eiusmod, ex esse air plant quinoa vaporware selfies keytar. Actually yuccie ennui flannel single-origin coffee, williamsburg cardigan banjo forage pug distillery tumblr hexagon vinyl occaecat.</p>
-
-          <div class="carousel-wrapper">
-              <div class="carousel">
-                <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
-                <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
-              </div>
-            </div>
-        </div>
-        <div class="gallery-action">
-          <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">favorite</i></a>
-        </div>
-      </div>
-    </div>
   </div>
 </div><!-- /.container -->

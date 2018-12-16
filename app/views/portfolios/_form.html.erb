@@ -18,7 +18,21 @@
           <%= form.text_field :title %>
         </div>
       </div>
-      
+    </div>
+
+    <div class="row">
+      <div class="col s12 m5 l5">
+        <div class="field">
+          <ul>
+            <%= form.fields_for :hashtags do |hashtag| %>
+            <li>
+              <%= hashtag.label :title, '태그' %>
+              <%= hashtag.text_field :title %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <div class="input-field col s12">
@@ -36,8 +50,6 @@
 <% end %>
 
 <script src="/js/editor/materialize.js"></script>
-
-
 
 <script type="text/javascript">
 document.addEventListener('turbolinks:load', function(){
@@ -74,6 +86,11 @@ document.addEventListener('turbolinks:load', function(){
   for ( var i = buttons.length; i--; ) {
     buttons[i].addEventListener('click', fn, false);
   }
+
+  if(<%= action_name == "edit" %>){
+    let content = document.getElementsByClassName('note-editable')[0];
+    content.innerHTML = document.getElementById('portfolio_content').value
+  }
 })
 
 document.getElementById('submitButton').addEventListener('click', function(e){
@@ -85,12 +102,16 @@ document.getElementById('submitButton').addEventListener('click', function(e){
   let imgs = content.getElementsByTagName('img');
   
   for(var i = 0 ; i < imgs.length ; i++){
-    let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
-    let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
-    let imgRatio = imgHeight / imgWidth;
-    let withEditorRatio = imgWidth / totalWidth * 100;
-    imgs[i].style.width = withEditorRatio + '%';
-    imgs[i].style.height = withEditorRatio * imgRatio + '%';
+    img = imgs[i];
+    if(img.style.height.indexOf('px') != -1 && img.style.width.indexOf('px') != -1 ){
+      // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
+      let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
+      let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
+      let imgRatio = imgHeight / imgWidth;
+      let withEditorRatio = imgWidth / totalWidth * 100;
+      imgs[i].style.width = withEditorRatio + '%';
+      imgs[i].style.height = withEditorRatio * imgRatio + '%';
+    }
   }
   
   document.getElementById('portfolio_content').value = content.innerHTML;

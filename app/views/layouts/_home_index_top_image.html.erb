@@ -13,18 +13,24 @@
 <div class="categories-wrapper">
   <div class="categories-container">
     <ul class="categories container">
-      <li class="active">
-        <%= link_to 'All', '#all', data: { turbolinks: false } %>
-      </li>
-      <li>
-        <%= link_to 'Rails', '#rails', data: { turbolinks: false } %>
-      </li>
-      <li>
-        <%= link_to 'Swift', '#swift', data: { turbolinks: false } %>
-      </li>
-      <li>
-        <%= link_to 'Django', '#django', data: { turbolinks: false } %>
-      </li>
+      <% if false %>
+        <li class="active">
+          <%= link_to 'All', '#all', data: { turbolinks: false } %>
+        </li>
+      <% end %>
+      <% @hashtags.each_with_index do |hashtag, index| %>
+        <li class="<% if hashtag.title=='rails' %>active category<%end%>">
+          
+          <%= link_to "#{ hashtag.title.humanize }", "##{ hashtag.title }", data: { turbolinks: false } %>
+        </li>
+      <% end %>
     </ul>
   </div>
 </div>
+
+<script>
+  document.addEventListener('turbolinks:load', function(){
+    document.getElementsByClassName('active category')[0].click()
+  })
+  
+</script>

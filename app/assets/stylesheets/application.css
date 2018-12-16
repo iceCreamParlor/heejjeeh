@@ -13,6 +13,22 @@
  
  *= require_self
  */
+.modal { width: 75% !important ; }
+
 .modal-content {
   background-color: #2A373E;
+}
+
+div.note-editable {
+  background-color: #D7D7D7;
+}
+
+.contact-title {
+  color: gray;
+  font-size: 30px;
+}
+
+.contact-text {
+  color: white;
+  font-size: 20px;
 }

@@ -6,6 +6,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios.json
   def index
     @portfolios = Portfolio.all
+    @hashtags = Hashtag.all
   end
 
   # GET /portfolios/1
@@ -16,17 +17,28 @@ class PortfoliosController < ApplicationController
   # GET /portfolios/new
   def new
     @portfolio = Portfolio.new
+    5.times { @portfolio.hashtags.new }
     @disable_carousel = true
   end
 
   # GET /portfolios/1/edit
   def edit
+    @disable_carousel = true
   end
 
   # POST /portfolios
   # POST /portfolios.json
   def create
     @portfolio = Portfolio.new(portfolio_params)
+
+    # 해시태그가 기존에 존재하면 그대로 내버려두고, 없으면 해시태그를 새로 생성
+    5.times do |x|
+      tag = hashtag_params[:hashtags_attributes]["#{x}"]["title"]
+      if tag != ""
+        a = Hashtag.find_or_create_by(title: tag)
+        @portfolio.hashtags << a
+      end
+    end
 
     respond_to do |format|
       if @portfolio.save
@@ -44,7 +56,7 @@ class PortfoliosController < ApplicationController
   def update
     respond_to do |format|
       if @portfolio.update(portfolio_params)
-        format.html { redirect_to @portfolio, notice: 'Portfolio was successfully updated.' }
+        format.html { redirect_to '/', notice: 'Portfolio was successfully updated.' }
         format.json { render :show, status: :ok, location: @portfolio }
       else
         format.html { render :edit }
@@ -58,7 +70,7 @@ class PortfoliosController < ApplicationController
   def destroy
     @portfolio.destroy
     respond_to do |format|
-      format.html { redirect_to portfolios_url, notice: 'Portfolio was successfully destroyed.' }
+      format.html { redirect_to '/', notice: 'Portfolio was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -72,5 +84,8 @@ class PortfoliosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def portfolio_params
       params.require(:portfolio).permit(:title, :content)
+    end
+    def hashtag_params
+      params.require(:portfolio).permit(hashtags_attributes: [:title])
     end
 end

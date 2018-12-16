@@ -23,69 +23,79 @@
   </head>
 
   <body class="blue-grey darken-4">
-
-    <!-- Navbar and Header -->
-    <nav class="nav-extended <% if @disable_carousel.nil? %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
-      
-      <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo"><i class="material-icons">camera</i>Gallery</a>
-        <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-          <li><a href="index.html">Gallery</a></li>
-          <li class="active"><a href="index-dark.html">Dark Theme</a></li>
-          <li>
+    
+      <!-- Navbar and Header -->
+      <nav class="nav-extended <% if @disable_carousel.nil? %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
+        
+        <div class="nav-wrapper container">
+          <a href="index.html" class="brand-logo"><i class="material-icons">camera</i>imheej</a>
+          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul class="right hide-on-med-and-down">
+            <li class="active">
+              <%= link_to 'Portfolio', '/' %>
+            </li>
+            <li>
               <% if user_signed_in? %>
                 <%= link_to 'Post', new_portfolio_path %>
               <% else %>
                 <%= link_to 'Post', '#login', class: 'modal-trigger' %>
               <% end %>
             </li>
-          <li>
+            <li>
+              <% if user_signed_in? %>
+                <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
+            </li>
+            <!-- <li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>Features<i class="material-icons right">arrow_drop_down</i></a></li> -->
+          </ul>
+          
+          <!-- Dropdown Structure -->
+          <!-- <ul id='feature-dropdown' class='dropdown-content'>
+            <li><a href="full-header.html">Fullscreen Header</a></li>
+            <li><a href="horizontal.html">Horizontal Style</a></li>
+            <li><a href="no-image.html">No Image Expand</a></li>
+          </ul> -->
+
+        </div>
+
+          <%= render 'layouts/home_index_top_image' if @disable_carousel.nil? %>      
+          
+      </nav>
+      
+      <ul class="sidenav" id="nav-mobile">
+        <li class="active">
+          <%= link_to 'Portfolio', '/' %>
+        </li>
+        <li>
             <% if user_signed_in? %>
-              <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+              <%= link_to 'Post', new_portfolio_path %>
             <% else %>
-              <%= link_to 'Login', '#login', class: 'modal-trigger' %>
+              <%= link_to 'Post', '#login', class: 'modal-trigger' %>
             <% end %>
           </li>
-          <li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>Features<i class="material-icons right">arrow_drop_down</i></a></li>
-        </ul>
+        <li>
+          <% if user_signed_in? %>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
+        </li>
         
-        <!-- Dropdown Structure -->
-        <ul id='feature-dropdown' class='dropdown-content'>
-          <li><a href="full-header.html">Fullscreen Header</a></li>
-          <li><a href="horizontal.html">Horizontal Style</a></li>
-          <li><a href="no-image.html">No Image Expand</a></li>
-        </ul>
+      </ul>
+      <div data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">
+      <%= yield %>
 
+      <!-- MODALS !! -->
+      <%= render 'layouts/modal/login', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
+      <%= render 'layouts/modal/contact' %>
       </div>
-
-        <%= render 'layouts/home_index_top_image' if @disable_carousel.nil? %>      
-
-    </nav>
-    
-    <ul class="sidenav" id="nav-mobile">
-      <li><a href="index.html"><i class="material-icons">camera</i>Gallery</a></li>
-      <li class="active"><a href="index-dark.html"><i class="material-icons">brightness_3</i>Dark Theme</a></li>
-      <li><a href="blog.html"><i class="material-icons">edit</i>Blog</a></li>
-      <li><a href="docs.html"><i class="material-icons">school</i>Docs</a></li>
-      <li><a href="full-header.html"><i class="material-icons">fullscreen</i>Fullscreen Header</a></li>
-      <li>
-        <%= link_to 'Post', new_portfolio_path %>
-      </li>
-      <li>
-        <% if user_signed_in? %>
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-        <% else %>
-          <%= link_to 'Login', '#login', class: 'modal-trigger' %>
-        <% end %>
-      </li>
-    </ul>
-    
-    <%= yield %>
-
-    <%= render 'layouts/modal/login', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
     <!-- Core Javascript -->
     
+
     <script src="/js/imagesloaded.pkgd.min.js"></script>
     <script src="/js/masonry.pkgd.min.js"></script>
     <script src="/js/materialize.min.js"></script>
