@@ -1,7 +1,8 @@
 class PortfoliosController < ApplicationController
+  protect_from_forgery with: :exception
   before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
-  
+
   # GET /portfolios
   # GET /portfolios.json
   def index
