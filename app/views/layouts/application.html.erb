@@ -38,17 +38,15 @@
             <li>
               <%= link_to 'Home', '/' %>
             </li>
-            <% if user_signed_in? %>
             
-            <% end %>
-            <li>
-              <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
-            </li>
             <li>
               <%= link_to 'Issues', issues_path %>
             </li>
             <li>
               <%= link_to 'Portfolio', portfolios_path %>
+            </li>
+            <li>
+              <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
             </li>
             <li>
             <% if user_signed_in? %>
@@ -79,26 +77,33 @@
       
       <ul class="sidenav" id="nav-mobile">
         <li class="active">
-          <%= link_to 'Portfolio', '/' %>
-        </li>
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to 'Post', new_portfolio_path %>
-          <% else %>
-            <%= link_to 'Post', '#login', class: 'modal-trigger' %>
-          <% end %>
+          <%= link_to 'Home', '/' %>
         </li>
         <li>
           <%= link_to 'Issues', issues_path %>
         </li>
+        <li><%= link_to 'Portfolio', portfolios_path %></li>
+        <li>
+          <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
+        </li>
+        <li>
+          <% if user_signed_in? %>
+            <%= link_to 'Logout', destroy_user_session_path, method: :delete %> 
+          <% else %>
+            <%= link_to 'Login', '#login', class: 'modal-trigger' %>
+          <% end %>
+        </li>
+        
         <li>
           <% if user_signed_in? %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
           <% end %>
         </li>
-        <li>
-          <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
-        </li>
+        <% if user_signed_in? %>
+        <li><%= link_to 'Portfolio', new_portfolio_path %></li>
+        <li><%= link_to 'Issues', new_issue_path %></li>
+        <% end %>
+        
         
       </ul>
       <div data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">

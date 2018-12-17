@@ -43,7 +43,7 @@
               <% end %>
 
               <% if check_authority %>
-                <%= link_to portfolio_path(portfolio.id), method: :delete, class: "btn-floating btn-large waves-effect waves-light" do %>
+                <%= link_to portfolio_path(portfolio.id), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "btn-floating btn-large waves-effect waves-light" do %>
                   <i class="material-icons">delete_forever</i>
                 <% end %>
               <% else %>

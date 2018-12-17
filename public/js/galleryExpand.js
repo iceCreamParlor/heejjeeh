@@ -336,7 +336,7 @@
           var navbar = $('<nav id="placeholder-navbar"></nav>');
           var navWrapper = $('<div class="nav-wrapper"></div>');
           var container = $('<div class="container"></div>');
-          var backBtn = $('<button class="back-btn"><i class="material-icons">arrow_back</i><span>Back</span></button>');
+          var backBtn = $('<button class="back-btn"><i class="material-icons">arrow_back</i></button>');
           var originalNavColor = '';
           if ($('nav').length) {
             originalNavColor = $('nav').css('background-color');

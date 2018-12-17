@@ -56,3 +56,17 @@ div, p, span {
 .black-text{
   color: black;
 }
+
+.float-btn-list {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.float-btn-ul {
+  list-style-type: none;
+}
+
+.float-btn {
+  margin: 5px;
+}

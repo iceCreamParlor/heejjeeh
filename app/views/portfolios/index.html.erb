@@ -1,12 +1,22 @@
-
+<%= content_tag "div", id:"portfolios-index", data: { portfolios: @portfolios.to_json} do%>
 <div class="container" style="margin-top: 30px;">
   <h1 class="white-text">Portfolio</h1>
+  <div class="row">
+    <% @hashtags.each do |hashtag| %>
+    <div class="col s3 m3 l2">
+      <label>
+        <input type="checkbox" class="filled-in" value="<%= hashtag.id %>" checked="checked" onchange="checkboxToggled(this)" />
+        <span><%= hashtag.title %></span>
+      </label>
+    </div>
+    <% end %>
+  </div>
   <div class="row" style="margin-top: 30px;">
     <% @portfolios.each do |portfolio| %>
     <%= link_to portfolio_path(portfolio) do %>
     <div class="col s12 m4 l4">
       
-        <div class="card">
+        <div class="card" id="portfolio-<%= portfolio.id %>">
           <div class="card-image">
             <img src="<%= portfolio.thumbnail %>">
             <!-- <span class="card-title"><%= portfolio.title %></span> -->
@@ -27,3 +37,62 @@
     <% end %>
   </div>
 </div>
+<% end %>
+
+<script>
+  var portfolios;
+  var portfolio_hashtags = [];
+  document.addEventListener('turbolinks:load', function(){
+    portfolios = JSON.parse(document.getElementById('portfolios-index').dataset.portfolios);
+    <% @portfolios.each do |portfolio| %>
+      var tempHashtag = [];
+      <% portfolio.hashtags.each do |hashtag| %>
+      tempHashtag.push(<%= hashtag.id %>)
+      <% end %>
+      portfolio_hashtags.push(tempHashtag)
+    <% end %>
+  })
+  function checkboxToggled(e){
+    let hashtagId = parseInt(e.value);
+    let isChecked = e.getAttribute('checked');
+    if (isChecked == 'checked') {
+      e.setAttribute('checked', 'unchecked');
+      isChecked = 'unchecked';
+    } else {
+      e.setAttribute('checked', 'checked');
+      isChecked = 'checked';
+    }
+    portfolios.forEach(function(portfolio){
+      portfolio['isShown'] = false;
+    })
+    
+    let selected_hashtag_id = []
+
+    $("input:checkbox").each(function(){
+      if($(this).is(":checked")){
+        selected_hashtag_id.push(parseInt($(this).val()));
+      }
+    })
+    console.log(selected_hashtag_id)
+    for(var i = 0 ; i < portfolio_hashtags.length ; i++){
+      portfolio_hashtags[i].forEach(function(hashtag){
+        
+        if(selected_hashtag_id.indexOf(hashtag) != -1){
+          
+          portfolios[i]['isShown'] = true
+        }  
+      })
+    }
+    
+    portfolios.forEach(function(portfolio){
+      if(portfolio['isShown']){
+        // console.log("block")
+        document.getElementById('portfolio-'+portfolio.id).style.display="block";
+      } else {
+        // console.log('hidden')
+        document.getElementById('portfolio-'+portfolio.id).style.display="none";
+      }
+    })
+
+  }
+</script>
