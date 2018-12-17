@@ -1,3 +1,4 @@
+<%= javascript_pack_tag 'home_index' %>
 
 <div class="nav-background">
   <img class="active" src="http://placehold.it/1400x600" alt="control room">
@@ -29,7 +30,7 @@
 </div>
 
 <script>
-  document.addEventListener('turbolinks:load', function(){
+  document.addEventListener('DOMContentLoaded', function(){
     document.getElementsByClassName('active category')[0].click()
   })
   
