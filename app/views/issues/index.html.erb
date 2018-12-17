@@ -1,0 +1,46 @@
+<%= content_tag "div", id:"issues-index", data: { issues: @issues.to_json} do%>
+<div class="container">
+  <h1 class="white-text">Issues</h1>
+  <input id="searchIssue" onkeyup="searchIssue()">
+  <%#= link_to 'New Issue', new_issue_path %>
+  <div class="row card-container" style="margin-top: 30px">
+    <% @issues.each do |issue| %>
+      <%= link_to issue_path(issue) do %>
+      <div class="col s12 m4 l4" id="card-<%= issue.id %>">
+        <div class="card-panel teal">
+          <h4 style="color: black"><%= issue.title %></h4>
+          <span class="black-text">
+            <%= issue.content.html_safe %>
+          </span>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<% end %>
+
+<script>
+  var issues;
+
+  document.addEventListener('turbolinks:load', function(){
+    issues = JSON.parse(document.getElementById('issues-index').dataset.issues);
+  })
+  
+  function searchIssue(){
+
+    let inputField = document.getElementById('searchIssue').value;
+
+    console.log(inputField)
+    for(var i = 0 ; i < issues.length ; i++){
+      
+      document.getElementById('card-' + issues[i].id).style.display = "block";
+
+      if( issues[i].title.indexOf(inputField) == -1 ){
+        
+        document.getElementById('card-' + issues[i].id).style.display = "none";
+
+      }
+    }
+  }
+</script>

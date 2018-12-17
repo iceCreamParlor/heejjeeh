@@ -1,0 +1,15 @@
+<div class="container">
+  <h4><%= @issue.title %></h4>
+  <div class="issue-content">
+    <%= @issue.content.html_safe %>
+  </div>
+</div>
+
+<style>
+  h4{
+    color: white
+  }
+  div{
+    color: white
+  }
+</style>

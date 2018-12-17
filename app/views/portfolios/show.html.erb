@@ -1,14 +1,12 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @portfolio.title %>
-</p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @portfolio.content.html_safe %>
-</p>
-
-<%= link_to 'Edit', edit_portfolio_path(@portfolio) %> |
-<%= link_to 'Back', portfolios_path %>
+  <div class="container">
+    <div class="card blue-grey darken-4">
+      <div class="card-content white-text">
+        <span class="card-title"><%= @portfolio.title %></span>
+        <%= @portfolio.content.html_safe %>
+      </div>
+      <!-- <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div> -->
+    </div>
+  </div>

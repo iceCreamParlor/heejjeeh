@@ -32,42 +32,45 @@
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
         
         <div class="nav-wrapper container">
-          <a href="index.html" class="brand-logo"><i class="material-icons">camera</i>imheej</a>
+          <a href="/" class="brand-logo"><i class="material-icons">camera</i>imheej</a>
           <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
-            <li class="active">
-              <%= link_to 'Portfolio', '/' %>
-            </li>
             <li>
-              <% if user_signed_in? %>
-                <% if check_authority %>
-                  <%= link_to 'Post', new_portfolio_path %>
-                <% else %>
-                <script>alertToast('작성 권한이 없습니다.')</script>
-                <% end %>
-                
-              <% else %>
-                <%= link_to 'Post', '#login', class: 'modal-trigger' %>
-              <% end %>
+              <%= link_to 'Home', '/' %>
             </li>
-            <li>
-              <% if user_signed_in? %>
-                <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-              <% end %>
-            </li>
+            <% if user_signed_in? %>
+            
+            <% end %>
             <li>
               <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
             </li>
-            <!-- <li><a class='dropdown-trigger' href='#' data-target='feature-dropdown'>Features<i class="material-icons right">arrow_drop_down</i></a></li> -->
+            <li>
+              <%= link_to 'Issues', issues_path %>
+            </li>
+            <li>
+              <%= link_to 'Portfolio', portfolios_path %>
+            </li>
+            <li>
+            <% if user_signed_in? %>
+              <%= link_to 'Logout', destroy_user_session_path, method: :delete %> 
+            <% else %>
+              <%= link_to 'Login', '#login', class: 'modal-trigger' %>
+            <% end %>
+            </li>
+            <% if user_signed_in? && check_authority %>
+            <li>
+              <a class='dropdown-trigger' href='#' data-target='feature-dropdown'>Post<i class="material-icons right">arrow_drop_down</i></a>
+            </li>
+            <% end %>
           </ul>
-          
+          <% if user_signed_in? && check_authority %>
           <!-- Dropdown Structure -->
-          <!-- <ul id='feature-dropdown' class='dropdown-content'>
-            <li><a href="full-header.html">Fullscreen Header</a></li>
-            <li><a href="horizontal.html">Horizontal Style</a></li>
-            <li><a href="no-image.html">No Image Expand</a></li>
-          </ul> -->
-
+          <ul id='feature-dropdown' class='dropdown-content'>
+            <li><%= link_to 'Portfolio', new_portfolio_path %></li>
+            <li><%= link_to 'Issues', new_issue_path %></li>
+            <li><a href="no-image.html">Profile</a></li>
+          </ul>
+          <% end %>
         </div>
           
           <%= render 'layouts/home_index_top_image' if @disable_carousel.nil? && controller_name != "sessions" %>      
@@ -79,12 +82,15 @@
           <%= link_to 'Portfolio', '/' %>
         </li>
         <li>
-            <% if user_signed_in? %>
-              <%= link_to 'Post', new_portfolio_path %>
-            <% else %>
-              <%= link_to 'Post', '#login', class: 'modal-trigger' %>
-            <% end %>
-          </li>
+          <% if user_signed_in? %>
+            <%= link_to 'Post', new_portfolio_path %>
+          <% else %>
+            <%= link_to 'Post', '#login', class: 'modal-trigger' %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to 'Issues', issues_path %>
+        </li>
         <li>
           <% if user_signed_in? %>
             <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
@@ -123,7 +129,11 @@
     <script type="text/javascript" src="/js/editor/codeMirror/codemirror.js"></script>
     <script type="text/javascript" src="/js/editor/codeMirror/xml.js"></script>
     <script type="text/javascript" src="/js/editor/materialSummernote.js"></script>
-    
+    <script>
+      <% if notice.present? %>
+        alertToast("<%= notice %>");
+      <% end %>
+    </script>
   </body>
 </html>
     

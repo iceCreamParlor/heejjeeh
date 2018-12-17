@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
     end
     return false
   end
-
-
+  def disable_carousel
+    @disable_carousel = true
+  end
 end

@@ -2,6 +2,7 @@ class PortfoliosController < ApplicationController
   protect_from_forgery with: :exception
   before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
+  before_action :disable_carousel
 
   # GET /portfolios
   # GET /portfolios.json

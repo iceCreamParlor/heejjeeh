@@ -40,3 +40,19 @@ img.cropper {
 .gallery-body {
   background-color: #D7D7D7 !important;
 }
+
+* {
+  word-wrap: break-word;
+}
+
+div, p, span {
+  font-weight: 500 !important
+}
+
+.white-text{
+  color: white;
+}
+
+.black-text{
+  color: black;
+}
