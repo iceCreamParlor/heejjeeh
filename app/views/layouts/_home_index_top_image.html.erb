@@ -1,4 +1,4 @@
-<%= javascript_pack_tag 'home_index' %>
+<%#= javascript_pack_tag 'home_index' %>
 
 <div class="nav-background">
   <img class="active" src="http://placehold.it/1400x600" alt="control room">
@@ -21,7 +21,7 @@
       <% end %>
       <% @hashtags.each_with_index do |hashtag, index| %>
         <li class="<% if hashtag.title=='rails' %>active category<%end%>">
-          
+
           <%= link_to "#{ hashtag.title.humanize }", "##{ hashtag.title }", data: { turbolinks: false } %>
         </li>
       <% end %>
@@ -33,5 +33,5 @@
   document.addEventListener('DOMContentLoaded', function(){
     document.getElementsByClassName('active category')[0].click()
   })
-  
+
 </script>
