@@ -42,7 +42,10 @@ img.cropper {
 }
 
 * {
-  word-wrap: break-word !important;
+  
+  word-wrap: break-all !important;
+  word-break: break-all !important;
+  
 }
 
 div, p, span {
