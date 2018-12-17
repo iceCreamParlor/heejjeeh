@@ -32,3 +32,11 @@ div.note-editable {
   color: white;
   font-size: 20px;
 }
+
+img.cropper {
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+
+.gallery-body {
+  background-color: #D7D7D7 !important;
+}

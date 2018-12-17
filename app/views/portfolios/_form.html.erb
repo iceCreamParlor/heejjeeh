@@ -39,13 +39,28 @@
         <div class="editor" id="editor"></div>
     </div>
     <%= form.text_field :content, style: "visibility: hidden;" %>
-      
+    
+    <!-- Cropper -->
+    <%= form.text_field :thumbnail, style: "visibility: hidden;" %>
+    <p>
+    <!-- Below are a series of inputs which allow file selection and interaction with the cropper api -->
+        <input type="file" id="fileInput" accept="image/*" />
+        <input type="button" id="btnCrop" value="Crop" />
+        <input type="button" id="btnRestore" value="Restore" />
+    </p>
+    <div>
+      <canvas id="canvas">
+        Your browser does not support the HTML5 canvas element.
+      </canvas>
+    </div>		
+    
+    <div id="result"></div>
     
     <div class="actions" style="float: right; margin-bottom: 100px;">
       <button class="waves-effect waves-light btn" id="submitButton">POST</button>
     </div>
   </div>
-  
+  <!-- Cropper -->
   
 <% end %>
 
@@ -91,7 +106,53 @@ document.addEventListener('turbolinks:load', function(){
     let content = document.getElementsByClassName('note-editable')[0];
     content.innerHTML = document.getElementById('portfolio_content').value
   }
+
+
+  var canvas  = $("#canvas"),
+    context = canvas.get(0).getContext("2d"),
+    $result = $('#result');
+
+  $('#fileInput').on( 'change', function(){
+      if (this.files && this.files[0]) {
+        if ( this.files[0].type.match(/^image\//) ) {
+          var reader = new FileReader();
+          reader.onload = function(evt) {
+            var img = new Image();
+            img.onload = function() {
+              context.canvas.height = img.height;
+              context.canvas.width  = img.width;
+              context.drawImage(img, 0, 0);
+              var cropper = canvas.cropper({
+                aspectRatio: 16 / 9
+              });
+              $('#btnCrop').click(function() {
+                  // Get a string base 64 data url
+                  var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png"); 
+                  document.getElementById('portfolio_thumbnail').value = croppedImageDataURL;
+                  $result.append( $('<img>').attr('src', croppedImageDataURL) );
+              });
+              $('#btnRestore').click(function() {
+                canvas.cropper('reset');
+                $result.empty();
+              });
+            };
+            img.src = evt.target.result;
+          };
+          reader.readAsDataURL(this.files[0]);
+        }
+        else {
+          alert("Invalid file type! Please select an image file.");
+        }
+      }
+      else {
+        alert('No file(s) selected.');
+      }
+  });
+
+
 })
+
+
 
 document.getElementById('submitButton').addEventListener('click', function(e){
   e.preventDefault();
@@ -103,18 +164,28 @@ document.getElementById('submitButton').addEventListener('click', function(e){
   
   for(var i = 0 ; i < imgs.length ; i++){
     img = imgs[i];
-    if(img.style.height.indexOf('px') != -1 && img.style.width.indexOf('px') != -1 ){
+    
+    if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
       // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
       let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
       let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
       let imgRatio = imgHeight / imgWidth;
       let withEditorRatio = imgWidth / totalWidth * 100;
-      imgs[i].style.width = withEditorRatio + '%';
-      imgs[i].style.height = withEditorRatio * imgRatio + '%';
+      img.style.width = withEditorRatio + '%';
+      img.style.height = withEditorRatio * imgRatio + '%';
     }
   }
   
   document.getElementById('portfolio_content').value = content.innerHTML;
-  form.submit();
+  let title_value = document.getElementById('portfolio_title').value;
+  let content_value = document.getElementById('portfolio_content').value;
+  let thumbnail_value = document.getElementById('portfolio_thumbnail').value;
+
+  if( content_value == "" || thumbnail_value == "" || title_value == "" ){
+    alertToast('항목을 모두 입력해 주세요.');
+  } else {
+    form.submit();
+  }
+  
 })
 </script> 

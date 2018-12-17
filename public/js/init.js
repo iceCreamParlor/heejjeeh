@@ -124,6 +124,6 @@
 
 })(jQuery); // end of jQuery name space
 
-function alertNoAuthority() {
-  M.toast({html: '명령을 수행할 권한이 없습니다.'})
+function alertToast(message) {
+  M.toast({html: message})
 }
