@@ -45,8 +45,8 @@ img.cropper {
   
   word-wrap: break-all !important;
   word-break: break-all !important;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Nanum Gothic', sans-serif !important;
+  font-family: 'Inconsolata', monospace !important;
   /* font-family: 'Consolas', monospace */
 }
 
