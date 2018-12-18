@@ -13,7 +13,7 @@
   </div>
   <div class="row" style="margin-top: 30px;">
     <% @portfolios.each do |portfolio| %>
-    <%= link_to portfolio_path(portfolio) do %>
+    <%= link_to portfolio_path(portfolio), data: { turbolinks: false } do %>
     <div class="col s12 m4 l4">
       
         <div class="card" id="portfolio-<%= portfolio.id %>">
