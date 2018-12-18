@@ -69,9 +69,8 @@
 <script type="text/javascript">
 document.addEventListener('turbolinks:load', function(){
 
-  
-
-  var toolbar = [
+  if(checkCurrentPage('portfolios-new') || checkCurrentPage('portfolios-edit')){
+    var toolbar = [
       ['style', ['style', 'bold', 'italic', 'underline', 'strikethrough', 'clear']],
       ['fonts', ['fontsize', 'fontname']],
       ['color', ['color']],
@@ -80,112 +79,116 @@ document.addEventListener('turbolinks:load', function(){
       ['misc', ['link', 'picture', 'table', 'hr', 'codeview', 'fullscreen']],
       ['para', ['ul', 'ol', 'paragraph', 'leftButton', 'centerButton', 'rightButton', 'justifyButton', 'outdentButton', 'indentButton']],
       ['height', ['lineheight']],
-  ];
+    ];
 
-  $('.editor').summernote({
-      toolbar: toolbar,
-      height: 1000,
-      minHeight: 100,
-      defaultBackColor: '#fff',
-      image: [
-        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-        ['float', ['floatLeft', 'floatRight', 'floatNone']],
-        ['remove', ['removeMedia']]
-      ],
-  });
+    $('.editor').summernote({
+        toolbar: toolbar,
+        height: 1000,
+        minHeight: 100,
+        defaultBackColor: '#fff',
+        image: [
+          ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+          ['float', ['floatLeft', 'floatRight', 'floatNone']],
+          ['remove', ['removeMedia']]
+        ],
+    });
 
-  // button 들의 action 을 없앤다. (이걸 지우면, 버튼을 눌렀을 때 form 이 submit 되는 현상 발생)
-  var buttons = document.querySelectorAll('button'),
-  fn      = function(e) { e.preventDefault() };
+    // button 들의 action 을 없앤다. (이걸 지우면, 버튼을 눌렀을 때 form 이 submit 되는 현상 발생)
+    var buttons = document.querySelectorAll('button'),
+    fn      = function(e) { e.preventDefault() };
 
-  for ( var i = buttons.length; i--; ) {
-    buttons[i].addEventListener('click', fn, false);
-  }
+    for ( var i = buttons.length; i--; ) {
+      buttons[i].addEventListener('click', fn, false);
+    }
 
-  if(<%= action_name == "edit" %>){
-    let content = document.getElementsByClassName('note-editable')[0];
-    content.innerHTML = document.getElementById('portfolio_content').value
-  }
+    if(<%= action_name == "edit" %>){
+      let content = document.getElementsByClassName('note-editable')[0];
+      content.innerHTML = document.getElementById('portfolio_content').value
+    }
 
 
-  var canvas  = $("#canvas"),
-    context = canvas.get(0).getContext("2d"),
-    $result = $('#result');
+    var canvas  = $("#canvas"),
+      context = canvas.get(0).getContext("2d"),
+      $result = $('#result');
 
-  $('#fileInput').on( 'change', function(){
-      if (this.files && this.files[0]) {
-        if ( this.files[0].type.match(/^image\//) ) {
-          var reader = new FileReader();
-          reader.onload = function(evt) {
-            var img = new Image();
-            img.onload = function() {
-              context.canvas.height = img.height;
-              context.canvas.width  = img.width;
-              context.drawImage(img, 0, 0);
-              var cropper = canvas.cropper({
-                aspectRatio: 16 / 9
-              });
-              $('#btnCrop').click(function() {
-                  // Get a string base 64 data url
-                  var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png"); 
-                  document.getElementById('portfolio_thumbnail').value = croppedImageDataURL;
-                  $result.append( $('<img>').attr('src', croppedImageDataURL) );
-              });
-              $('#btnRestore').click(function() {
-                canvas.cropper('reset');
-                $result.empty();
-              });
+    $('#fileInput').on( 'change', function(){
+        if (this.files && this.files[0]) {
+          if ( this.files[0].type.match(/^image\//) ) {
+            var reader = new FileReader();
+            reader.onload = function(evt) {
+              var img = new Image();
+              img.onload = function() {
+                context.canvas.height = img.height;
+                context.canvas.width  = img.width;
+                context.drawImage(img, 0, 0);
+                var cropper = canvas.cropper({
+                  aspectRatio: 16 / 9
+                });
+                $('#btnCrop').click(function() {
+                    // Get a string base 64 data url
+                    var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png"); 
+                    document.getElementById('portfolio_thumbnail').value = croppedImageDataURL;
+                    $result.append( $('<img>').attr('src', croppedImageDataURL) );
+                });
+                $('#btnRestore').click(function() {
+                  canvas.cropper('reset');
+                  $result.empty();
+                });
+              };
+              img.src = evt.target.result;
             };
-            img.src = evt.target.result;
-          };
-          reader.readAsDataURL(this.files[0]);
+            reader.readAsDataURL(this.files[0]);
+          }
+          else {
+            alert("Invalid file type! Please select an image file.");
+          }
         }
         else {
-          alert("Invalid file type! Please select an image file.");
+          alert('No file(s) selected.');
         }
-      }
-      else {
-        alert('No file(s) selected.');
-      }
-  });
-
-
-})
-
-
-
-document.getElementById('submitButton').addEventListener('click', function(e){
-  e.preventDefault();
-  let form = document.getElementById('form');
-  let content = document.getElementsByClassName('note-editable')[0]
-  let totalWidth = content.offsetWidth;
+    });
+  }
   
-  let imgs = content.getElementsByTagName('img');
-  
-  for(var i = 0 ; i < imgs.length ; i++){
-    img = imgs[i];
+  document.getElementById('submitButton').addEventListener('click', function(e){
+    e.preventDefault();
+    let form = document.getElementById('form');
+    let content = document.getElementsByClassName('note-editable')[0]
+    let totalWidth = content.offsetWidth;
     
-    if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
-      // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
-      let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
-      let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
-      let imgRatio = imgHeight / imgWidth;
-      let withEditorRatio = imgWidth / totalWidth * 100;
-      img.style.width = withEditorRatio + '%';
-      img.style.height = withEditorRatio * imgRatio + '%';
+    let imgs = content.getElementsByTagName('img');
+    
+    for(var i = 0 ; i < imgs.length ; i++){
+      img = imgs[i];
+      
+      if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
+        // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
+        let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
+        let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
+        let imgRatio = imgHeight / imgWidth;
+        let withEditorRatio = imgWidth / totalWidth * 100;
+        img.style.width = withEditorRatio + '%';
+        img.style.height = withEditorRatio * imgRatio + '%';
+      }
     }
-  }
-  
-  document.getElementById('portfolio_content').value = content.innerHTML;
-  let title_value = document.getElementById('portfolio_title').value;
-  let content_value = document.getElementById('portfolio_content').value;
-  let thumbnail_value = document.getElementById('portfolio_thumbnail').value;
+    
+    document.getElementById('portfolio_content').value = content.innerHTML;
+    let title_value = document.getElementById('portfolio_title').value;
+    let content_value = document.getElementById('portfolio_content').value;
+    let thumbnail_value = document.getElementById('portfolio_thumbnail').value;
 
-  if( content_value == "" || thumbnail_value == "" || title_value == "" ){
-    alertToast('항목을 모두 입력해 주세요.');
-  } else {
-    form.submit();
-  }
+    if( content_value == "" || thumbnail_value == "" || title_value == "" ){
+      alertToast('항목을 모두 입력해 주세요.');
+    } else {
+      form.submit();
+    }
+    
+  })
+
   
+
+
 })
+
+
+
 </script> 

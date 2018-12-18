@@ -24,7 +24,9 @@
   var issues;
 
   document.addEventListener('turbolinks:load', function(){
-    issues = JSON.parse(document.getElementById('issues-index').dataset.issues);
+    if(checkCurrentPage('issues-index')){
+      issues = JSON.parse(document.getElementById('issues-index').dataset.issues);
+    }
   })
   
   function searchIssue(){

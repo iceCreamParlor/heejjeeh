@@ -4,7 +4,7 @@ import TurbolinksAdapter from 'vue-turbolinks'
 Vue.use(TurbolinksAdapter)
 
 document.addEventListener('turbolinks:load', () => {
-  console.log("!!!")
+  
   let el = document.getElementById('portfolio');
   if(el){
     const app = new Vue({

@@ -127,3 +127,10 @@
 function alertToast(message) {
   M.toast({html: message})
 }
+
+function checkCurrentPage(page){
+  if(document.querySelector('.page[data-page=' + page + ']')){
+    return true;
+  }
+  return false;
+}

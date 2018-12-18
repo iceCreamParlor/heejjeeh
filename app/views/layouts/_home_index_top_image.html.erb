@@ -31,7 +31,9 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function(){
-    document.getElementsByClassName('active category')[0].click()
+    if(checkCurrentPage('home-index')){
+      document.getElementsByClassName('active category')[0].click()
+    }
   })
 
 </script>

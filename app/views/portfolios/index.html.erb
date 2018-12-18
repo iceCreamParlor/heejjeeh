@@ -43,14 +43,18 @@
   var portfolios;
   var portfolio_hashtags = [];
   document.addEventListener('turbolinks:load', function(){
-    portfolios = JSON.parse(document.getElementById('portfolios-index').dataset.portfolios);
-    <% @portfolios.each do |portfolio| %>
-      var tempHashtag = [];
-      <% portfolio.hashtags.each do |hashtag| %>
-      tempHashtag.push(<%= hashtag.id %>)
+    if(checkCurrentPage('portfolios-index')){
+      console.log("!!")
+      portfolios = JSON.parse(document.getElementById('portfolios-index').dataset.portfolios);
+      <% @portfolios.each do |portfolio| %>
+        var tempHashtag = [];
+        <% portfolio.hashtags.each do |hashtag| %>
+        tempHashtag.push(<%= hashtag.id %>)
+        <% end %>
+        portfolio_hashtags.push(tempHashtag)
       <% end %>
-      portfolio_hashtags.push(tempHashtag)
-    <% end %>
+    }
+    
   })
   function checkboxToggled(e){
     let hashtagId = parseInt(e.value);
@@ -78,7 +82,6 @@
       portfolio_hashtags[i].forEach(function(hashtag){
         
         if(selected_hashtag_id.indexOf(hashtag) != -1){
-          
           portfolios[i]['isShown'] = true
         }  
       })
