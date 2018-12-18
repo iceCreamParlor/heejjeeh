@@ -43,7 +43,7 @@
               <%= link_to 'Issues', issues_path %>
             </li>
             <li>
-              <%= link_to 'Portfolio', portfolios_path %>
+              <%= link_to 'Portfolio', portfolios_path, data: { turbolinks: false } %>
             </li>
             <li>
               <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
@@ -82,7 +82,7 @@
         <li>
           <%= link_to 'Issues', issues_path %>
         </li>
-        <li><%= link_to 'Portfolio', portfolios_path %></li>
+        <li><%= link_to 'Portfolio', portfolios_path, data: { turbolinks: false } %></li>
         <li>
           <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
         </li>
