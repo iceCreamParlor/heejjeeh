@@ -1,9 +1,13 @@
 <div id="contact" class="modal">
   <div class="modal-content">
     <div class="container">
-      <div class="progress">
-          <div class="indeterminate"></div>
-      </div>
+      <!-- <p class="contact-title">Profile </p> -->
+      <%= link_to profiles_path, class: "contact-title" do %>
+      Profile
+        <div class="chip">
+          link
+        </div>
+      <% end %>
       <p class="contact-title">Github </p>
       <a href="https://github.com/iceCreamParlor" class="contact-text">
         iceCreamParlor 

@@ -1,7 +1,14 @@
 <%= content_tag "div", id:"issues-index", data: { issues: @issues.to_json} do%>
 <div class="container">
   <h1 class="white-text">Issues</h1>
-  <input id="searchIssue" onkeyup="searchIssue()">
+
+  <div class="input-field col s6 white-text">
+    <i class="material-icons prefix">search</i>
+    <input id="searchIssue" onkeyup="searchIssue()">
+  </div>
+
+  <!-- <i class="material-icons prefix">account_circle</i> -->
+  <!-- <input id="searchIssue" onkeyup="searchIssue()"> -->
   <%#= link_to 'New Issue', new_issue_path %>
   <div class="row card-container" style="margin-top: 30px">
     <% @issues.each do |issue| %>
@@ -33,7 +40,6 @@
 
     let inputField = document.getElementById('searchIssue').value;
 
-    console.log(inputField)
     for(var i = 0 ; i < issues.length ; i++){
       
       document.getElementById('card-' + issues[i].id).style.display = "block";
