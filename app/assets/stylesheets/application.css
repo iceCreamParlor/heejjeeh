@@ -13,6 +13,8 @@
  
  *= require_self
  */
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans|Caveat+Brush');
+
 .modal { width: 75% !important ; }
 
 .modal-content {
@@ -46,8 +48,9 @@ img.cropper {
   word-wrap: break-all !important;
   word-break: break-all !important;
   font-family: 'Nanum Gothic', sans-serif;
-  font-family: 'Inconsolata', monospace;
   font-family: 'Consolas', monospace;
+  font-family: 'Inconsolata', monospace;
+  
   /* font-family: 'Consolas', monospace */
 }
 
