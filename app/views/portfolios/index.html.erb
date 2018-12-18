@@ -44,7 +44,7 @@
   var portfolio_hashtags = [];
   document.addEventListener('turbolinks:load', function(){
     if(checkCurrentPage('portfolios-index')){
-      console.log("!!")
+      
       portfolios = JSON.parse(document.getElementById('portfolios-index').dataset.portfolios);
       <% @portfolios.each do |portfolio| %>
         var tempHashtag = [];

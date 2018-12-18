@@ -73,3 +73,7 @@ div, p, span {
 .float-btn {
   margin: 5px;
 }
+
+input, select, textarea{
+  color: #D7D7D7;
+}

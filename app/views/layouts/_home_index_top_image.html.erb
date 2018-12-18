@@ -32,7 +32,9 @@
 <script>
   document.addEventListener('DOMContentLoaded', function(){
     if(checkCurrentPage('home-index')){
-      document.getElementsByClassName('active category')[0].click()
+      if(document.getElementsByClassName('active category')[0]){
+        document.getElementsByClassName('active category')[0].click()
+      }
     }
   })
 

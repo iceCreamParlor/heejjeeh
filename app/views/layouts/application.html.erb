@@ -32,11 +32,14 @@
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
         
         <div class="nav-wrapper container">
-          <a href="/" class="brand-logo"><i class="material-icons">camera</i>imheej</a>
+          <%= link_to '/', class: "brand-logo", data: { turbolinks: false }  do %>
+            <i class="material-icons">camera</i>imheej
+          <% end %>
+          <!-- <a href="/" class="brand-logo"><i class="material-icons">camera</i>imheej</a> -->
           <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
           <ul class="right hide-on-med-and-down">
             <li>
-              <%= link_to 'Home', '/' %>
+              <%= link_to 'Home', '/', data: { turbolinks: false } %>
             </li>
             
             <li>
@@ -77,7 +80,7 @@
       
       <ul class="sidenav" id="nav-mobile">
         <li class="active">
-          <%= link_to 'Home', '/' %>
+          <%= link_to 'Home', '/', data: { turbolinks: false } %>
         </li>
         <li>
           <%= link_to 'Issues', issues_path %>
@@ -86,22 +89,18 @@
         <li>
           <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
         </li>
-        <li>
-          <% if user_signed_in? %>
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete %> 
-          <% else %>
-            <%= link_to 'Login', '#login', class: 'modal-trigger' %>
-          <% end %>
-        </li>
         
         <li>
-          <% if user_signed_in? %>
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-          <% end %>
-        </li>
         <% if user_signed_in? %>
-        <li><%= link_to 'Portfolio', new_portfolio_path %></li>
-        <li><%= link_to 'Issues', new_issue_path %></li>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete %> 
+        <% else %>
+          <%= link_to 'Login', '#login', class: 'modal-trigger' %>
+        <% end %>
+        </li>
+        
+        <% if user_signed_in? %>
+        <li><%= link_to 'New Portfolio', new_portfolio_path %></li>
+        <li><%= link_to 'New Issues', new_issue_path %></li>
         <% end %>
         
         
