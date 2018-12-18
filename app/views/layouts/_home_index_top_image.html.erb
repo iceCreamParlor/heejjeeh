@@ -20,7 +20,7 @@
         </li>
       <% end %>
       <% @hashtags.each_with_index do |hashtag, index| %>
-        <li class="<% if hashtag.title=='rails' %>active category<%end%>">
+        <li>
 
           <%= link_to "#{ hashtag.title.humanize }", "##{ hashtag.title }", data: { turbolinks: false } %>
         </li>
