@@ -1,0 +1,71 @@
+<div class="container">
+
+  <h1 class="white-text">Profiles</h1>
+  <div class="row">
+    <div class="col s12 m6 l6">
+        
+      <div class="card horizontal blue-grey darken-3 white-text">
+        <div class="card-stacked">
+          <div class="card-content">
+            <h4>Kim Heejae</h4>
+            <br>
+            <div>
+              <h5>Full Stack Developer</h5>
+              <h5>이것 저것 만들어보는 걸</h5>
+              <h5>좋아하는 개발자입니다.</h5>
+            </div>
+            <br>
+            <p>Stacks</p>
+            <div class="row">
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/rails.png"/>
+              </div>
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/angular.png"/>
+              </div>
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/swift.png"/>
+              </div>
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/typescript.png"/>
+              </div>
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/aws.png"/>
+              </div>
+              <div class="col s2 m2 l2 logo-frame">
+                <span class="helper"></span><img class="stack-logo" src="/images/django.png"/>
+              </div>
+
+            </div>
+          </div>
+          
+        </div>
+      </div>
+            
+        
+    </div>
+    <div class="col s12 m6 l6">
+      <table>
+        <thead></thead>
+        <tbody>
+          <% @profiles.each do |profile| %>
+            <tr class="white-text">
+              <td><%= profile.date.strftime("%Y년 %m월") %></td>
+              <td><%= profile.content %></td>
+              <% if current_user.present? && check_authority %>
+              <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
+              <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+
+  <br>
+  <% if current_user.present? && check_authority %>
+    <%= link_to 'New Profile', new_profile_path %>
+  <% end %>
+</div>

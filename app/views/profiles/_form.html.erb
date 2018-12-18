@@ -1,0 +1,33 @@
+<div class="container">
+  <h1 class="white-text"><%= action_name.humanize %> Profile</h1>
+  <%= form_with(model: profile, local: true) do |form| %>
+    <% if profile.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+        <ul>
+        <% profile.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :content %>
+      <%= form.text_field :content %>
+    </div>
+
+    <div class="field">
+      <%= form.label :date %>
+      <%= form.datetime_select :date %>
+    </div>
+    
+    <div class="actions" style="float: right; margin-top: 50px; margin-bottom: 100px;">
+        <%= link_to 'Back', profiles_path, class: "waves-effect waves-light btn" %>
+      <button type="submit" class="waves-effect waves-light btn" >POST</button>
+    </div>
+
+  <% end %>
+  
+</div>

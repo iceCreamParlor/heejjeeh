@@ -82,3 +82,19 @@ div, p, span {
 input, select, textarea{
   color: #D7D7D7;
 }
+
+.stack-logo {
+  width: 100%;
+  vertical-align: middle;
+}
+.logo-frame {
+  height: 60px;      /* equals max image height */
+  white-space: nowrap;
+  text-align: center; margin: 1em 0;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
