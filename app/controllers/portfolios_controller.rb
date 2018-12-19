@@ -8,7 +8,7 @@ class PortfoliosController < ApplicationController
   # GET /portfolios.json
   def index
     @portfolios = Portfolio.all.order(created_at: :desc)
-    @hashtags = Hashtag.all
+    @hashtags = Hashtag.all.order(created_at: :desc)
   end
 
   # GET /portfolios/1
