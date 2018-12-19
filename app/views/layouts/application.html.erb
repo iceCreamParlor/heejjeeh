@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
+  <body id="body" style="visibility:hidden;" class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
     
       <!-- Navbar and Header -->
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
@@ -167,6 +167,7 @@
     <script>
       document.addEventListener('turbolinks:load', function(){
         document.getElementById('preloader').style.display="none";
+        document.getElementById('body').style.visibility="visible";
       })
     </script>
   </body>
