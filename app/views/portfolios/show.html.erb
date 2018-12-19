@@ -1,4 +1,34 @@
 <div class="container">
+  
+    <div class="portfolio-setting" style="float: right;">
+
+      <%= link_to portfolios_path, class: "float-btn btn-floating green fixed", style: "right: 50px; bottom: 50px;" do %>
+        <i class="material-icons">arrow_back</i>
+      <% end %>
+      <% if user_signed_in? %>
+        <% if check_authority %>
+          <%= link_to edit_portfolio_path(@portfolio.id), data: {confirm: "수정하시겠습니까 ?"}, class: "float-btn btn-floating blue fixed", style: "right: 150px; bottom: 50px;" do %>
+            <i class="material-icons">edit</i>
+          <% end %>
+        <% else %>
+          <a class= "float-btn btn-floating blue" onclick="alertToast('수정 권한이 없습니다.')">
+            <i class="material-icons">edit</i>
+          </a>
+        <% end %>
+      
+        <% if check_authority %>
+          <%= link_to portfolio_path(@portfolio.id), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "float-btn btn-floating red fixed", style: "right: 100px; bottom: 50px;" do %>
+            <i class="material-icons">delete_forever</i>
+          <% end %>
+        <% else %>
+          <a class= "float-btn btn-floating red" onclick="alertToast('삭제 권한이 없습니다.')">
+            <i class="material-icons">delete_forever</i>
+          </a>
+        <% end %>
+      <% end %>
+    </div>
+  
+
   <div class="card blue-grey darken-4">
     <div class="card-content white-text">
       <span class="card-title"><%= @portfolio.title %></span>
@@ -6,31 +36,3 @@
     </div>
   </div>
 </div>
-<% if user_signed_in? %>
-<div class="float-btn-list">
-  <ul class="float-btn-ul">
-
-      <% if check_authority %>
-        <%= link_to edit_portfolio_path(@portfolio.id), data: {confirm: "수정하시겠습니까 ?"}, class: "float-btn btn-floating blue" do %>
-          <i class="material-icons">edit</i>
-        <% end %>
-      <% else %>
-        <a class= "float-btn btn-floating blue" onclick="alertToast('수정 권한이 없습니다.')">
-          <i class="material-icons">edit</i>
-        </a>
-      <% end %>
-    </li>
-    <li>
-      <% if check_authority %>
-        <%= link_to portfolio_path(@portfolio.id), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "float-btn btn-floating red" do %>
-          <i class="material-icons">delete_forever</i>
-        <% end %>
-      <% else %>
-        <a class= "float-btn btn-floating red" onclick="alertToast('삭제 권한이 없습니다.')">
-          <i class="material-icons">delete_forever</i>
-        </a>
-      <% end %>
-    </li>
-  </ul>
-</div>
-<% end %>

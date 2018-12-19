@@ -1,4 +1,33 @@
+
 <div class="container">
+  <div class="issue-setting" style="float: right;">
+  <%= link_to issues_path, class: "float-btn btn-floating green fixed", style: "right: 50px; bottom: 50px;" do %>
+    <i class="material-icons">arrow_back</i>
+  <% end %>
+  <% if user_signed_in? %>
+    <% if check_authority %>
+      <%= link_to edit_issue_path(@issue), data: {confirm: "수정하시겠습니까 ?"}, class: "float-btn btn-floating blue fixed", style: "right: 150px; bottom: 50px;" do %>
+        <i class="material-icons">edit</i>
+      <% end %>
+    <% else %>
+      <a class= "float-btn btn-floating blue fixed" onclick="alertToast('수정 권한이 없습니다.')">
+        <i class="material-icons">edit</i>
+      </a>
+    <% end %>
+  
+    <% if check_authority %>
+      <%= link_to issue_path(@issue), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "float-btn btn-floating red fixed", style: "right: 100px; bottom: 50px;" do %>
+        <i class="material-icons">delete_forever</i>
+      <% end %>
+    <% else %>
+      <a class= "float-btn btn-floating red" onclick="alertToast('삭제 권한이 없습니다.')">
+        <i class="material-icons">delete_forever</i>
+      </a>
+    <% end %>
+  <% end %>
+  </div>
+
+
   <h4><%= @issue.title %></h4>
   <div class="issue-content">
     <%= @issue.content.html_safe %>

@@ -25,6 +25,7 @@
     <link href="/css/cropper/cropper.min.css" rel="stylesheet">
     <!-- <link href="https://fonts.googleapis.com/css?family=Inconsolata|Nanum+Gothic" rel="stylesheet"> -->
     <script src="/js/cropper/cropper.min.js"></script>
+
   </head>
 
   <body class="blue-grey darken-4">
@@ -44,7 +45,7 @@
             </li>
             
             <li>
-              <%= link_to 'Issues', issues_path %>
+              <%= link_to 'Issues', issues_path, data: { turbolinks: false } %>
             </li>
             <li>
               <%= link_to 'Portfolio', portfolios_path, data: { turbolinks: false } %>
@@ -85,7 +86,7 @@
           <%= link_to 'Home', '/', data: { turbolinks: false } %>
         </li>
         <li>
-          <%= link_to 'Issues', issues_path %>
+          <%= link_to 'Issues', issues_path, data: { turbolinks: false } %>
         </li>
         <li><%= link_to 'Portfolio', portfolios_path, data: { turbolinks: false } %></li>
         <li><%= link_to 'Profile', profiles_path, data: { turbolinks: false } %></li>

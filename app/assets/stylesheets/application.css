@@ -21,6 +21,10 @@
   background-color: #2A373E;
 }
 
+.fixed {
+  position: fixed !important;
+}
+
 div.note-editable {
   background-color: #D7D7D7;
 }
