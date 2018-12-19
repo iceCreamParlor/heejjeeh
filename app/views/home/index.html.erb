@@ -4,7 +4,7 @@
   <div class="gallery row">
     <% @portfolios.each do |portfolio| %>
       
-        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <% portfolio.hashtags.each do |hashtag| %> <%= hashtag.title %>" <% end %>>
+        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <% portfolio.hashtags.each do |hashtag| %> <%= hashtag.title %> <% end %>">
           <div class="gallery-curve-wrapper">
             <a class="gallery-cover gray">
               <% if portfolio.thumbnail.present? %>
