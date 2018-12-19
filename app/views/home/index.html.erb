@@ -3,8 +3,8 @@
 <div id="portfolio" class="section gray">
   <div class="gallery row">
     <% @portfolios.each do |portfolio| %>
-      <% portfolio.hashtags.each do |hashtag| %>
-        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <%= hashtag.title %>">
+      
+        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <% portfolio.hashtags.each do |hashtag| %> <%= hashtag.title %>" <% end %>>
           <div class="gallery-curve-wrapper">
             <a class="gallery-cover gray">
               <% if portfolio.thumbnail.present? %>
@@ -54,7 +54,7 @@
             </div>
           </div>
         </div>
-      <% end %>
+      
     <% end %>
   </div>
 </div><!-- /.container -->
