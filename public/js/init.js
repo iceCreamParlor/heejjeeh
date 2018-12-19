@@ -134,12 +134,4 @@ function checkCurrentPage(page){
   }
   return false;
 }
-var isModalShowing = false;
-var maxCount = 3;
-function homeIndexScrollDown(){
-  if(!isModalShowing && maxCount > 0){
-    maxCount -= 1;
-    isModalShowing = !isModalShowing;
-    Materialize.toast('하단의 사진을 클릭해 보세요.', 2000, 'blue', function(){isModalShowing = !isModalShowing})
-  }
-}
+
