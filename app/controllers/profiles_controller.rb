@@ -5,7 +5,7 @@ class ProfilesController < InheritedResources::Base
   before_action :disable_carousel
 
   def index
-    @profiles = Profile.all
+    @profiles = Profile.all.order(created_at: :asc)
   end
 
   
