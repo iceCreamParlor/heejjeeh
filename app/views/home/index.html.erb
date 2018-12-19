@@ -4,56 +4,56 @@
   <div class="gallery row">
     <% @portfolios.each do |portfolio| %>
       
-        <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <% portfolio.hashtags.each do |hashtag| %> <%= hashtag.title %> <% end %>">
-          <div class="gallery-curve-wrapper">
-            <a class="gallery-cover gray">
-              <% if portfolio.thumbnail.present? %>
-              <img class="responsive-img" src="<%= portfolio.thumbnail.html_safe %>" alt="placeholder">
-              <% else %>
-              <img class="responsive-img" src="http://placehold.it/300x200" alt="placeholder">
-              <% end %>
-            </a>
-            <div class="gallery-body">
-              <div class="title-wrapper">
-                <h3><%= portfolio.title %></h3>
-              </div>
-              <div class="content">
-                <%= portfolio.content.html_safe %>
-              </div>
-
-              <!-- <div class="carousel-wrapper">
-                <div class="carousel">
-                  <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
-                  <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
-                  <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
-                  <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
-                  <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
-                </div>
-              </div> -->
+      <div class="col l4 m6 s12 gallery-item gallery-expand gallery-filter <% portfolio.hashtags.each do |hashtag| %> <%= hashtag.title %> <% end %>">
+        <div class="gallery-curve-wrapper">
+          <a class="gallery-cover gray">
+            <% if portfolio.thumbnail.present? %>
+            <img class="responsive-img" src="<%= portfolio.thumbnail.html_safe %>" alt="placeholder">
+            <% else %>
+            <img class="responsive-img" src="http://placehold.it/300x200" alt="placeholder">
+            <% end %>
+          </a>
+          <div class="gallery-body">
+            <div class="title-wrapper">
+              <h3><%= portfolio.title %></h3>
             </div>
-            <div class="gallery-action">
-              <% if check_authority %>
-                <%= link_to edit_portfolio_path(portfolio.id), class: "btn-floating btn-large waves-effect waves-light" do %>
-                  <i class="material-icons">edit</i>
-                <% end %>
-              <% else %>
-                <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertToast('수정 권한이 없습니다.')">
-                  <i class="material-icons">edit</i>
-                </a>
-              <% end %>
-
-              <% if check_authority %>
-                <%= link_to portfolio_path(portfolio.id), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "btn-floating btn-large waves-effect waves-light" do %>
-                  <i class="material-icons">delete_forever</i>
-                <% end %>
-              <% else %>
-                <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertToast('삭제 권한이 없습니다.')">
-                  <i class="material-icons">delete_forever</i>
-                </a>
-              <% end %>
+            <div class="content">
+              <%= portfolio.content.html_safe %>
             </div>
+
+            <!-- <div class="carousel-wrapper">
+              <div class="carousel">
+                <a class="carousel-item" href="#one!"><img src="http://placehold.it/300x200"></a>
+                <a class="carousel-item" href="#two!"><img src="http://placehold.it/300x200"></a>
+                <a class="carousel-item" href="#three!"><img src="http://placehold.it/300x200"></a>
+                <a class="carousel-item" href="#four!"><img src="http://placehold.it/300x200"></a>
+                <a class="carousel-item" href="#five!"><img src="http://placehold.it/300x200"></a>
+              </div>
+            </div> -->
+          </div>
+          <div class="gallery-action">
+            <% if check_authority %>
+              <%= link_to edit_portfolio_path(portfolio.id), class: "btn-floating btn-large waves-effect waves-light" do %>
+                <i class="material-icons">edit</i>
+              <% end %>
+            <% else %>
+              <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertToast('수정 권한이 없습니다.')">
+                <i class="material-icons">edit</i>
+              </a>
+            <% end %>
+
+            <% if check_authority %>
+              <%= link_to portfolio_path(portfolio.id), method: :delete, data: {confirm: "정말 삭제하시겠습니까?"}, class: "btn-floating btn-large waves-effect waves-light" do %>
+                <i class="material-icons">delete_forever</i>
+              <% end %>
+            <% else %>
+              <a class= "btn-floating btn-large waves-effect waves-light" onclick="alertToast('삭제 권한이 없습니다.')">
+                <i class="material-icons">delete_forever</i>
+              </a>
+            <% end %>
           </div>
         </div>
+      </div>
       
     <% end %>
   </div>

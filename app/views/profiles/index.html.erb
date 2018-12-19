@@ -49,7 +49,7 @@
         <tbody>
           <% @profiles.each do |profile| %>
             <tr class="white-text">
-              <td><%= profile.date.strftime("%Y년 %m월") %></td>
+              <td><%= profile.date.strftime("%Y / %m") %></td>
               <td><%= profile.content %></td>
               <% if current_user.present? && check_authority %>
               <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
