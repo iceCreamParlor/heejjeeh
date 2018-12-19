@@ -28,7 +28,7 @@
   </div>
 
 
-  <h4><%= @issue.title %></h4>
+  <h4 style="margin-top:40px;"><%= @issue.title %></h4>
   <div class="issue-content">
     <%= @issue.content.html_safe %>
   </div>
@@ -40,5 +40,8 @@
   }
   div{
     color: white
+  }
+  .issue-content {
+    margin-top: 80px;
   }
 </style>
