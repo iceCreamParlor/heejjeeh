@@ -64,7 +64,7 @@ class ProfilesController < InheritedResources::Base
   private
 
     def profile_params
-      params.require(:profile).permit(:title, :date)
+      params.require(:profile).permit(:content, :date)
     end
     def set_profile
       @profile = Profile.find(params[:id])
