@@ -8,8 +8,6 @@ class PortfoliosController < ApplicationController
   # GET /portfolios.json
   def index
     @portfolios = Portfolio.all.order(created_at: :desc)
-
-
     @hashtags = Hashtag.all
   end
 
