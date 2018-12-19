@@ -29,13 +29,45 @@
   </head>
 
   <div id="preloader" class="preloader-wrapper big active" style="position: absolute; left: 50%; top: 55%; margin-left: -29px; margin-top: -29px; z-index:500;">
-    <div class="spinner-layer spinner-blue-only">
-      <div class="circle-clipper left">
-        <div class="circle"></div>
-      </div><div class="gap-patch">
-        <div class="circle"></div>
-      </div><div class="circle-clipper right">
-        <div class="circle"></div>
+    <div class="preloader-wrapper big active">
+      <div class="spinner-layer spinner-blue">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-red">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-yellow">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
+
+      <div class="spinner-layer spinner-green">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -121,7 +153,7 @@
         
         
       </ul>
-      <div id="body" style="visibility:hidden;" data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">
+      <div data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">
         <%= yield %>
 
         <!-- MODALS !! -->
@@ -167,7 +199,6 @@
     <script>
       document.addEventListener('turbolinks:load', function(){
         document.getElementById('preloader').style.display="none";
-        document.getElementById('body').style.visibility="visible";
       })
     </script>
   </body>
