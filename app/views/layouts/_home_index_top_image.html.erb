@@ -18,7 +18,8 @@
       <% end %>
       
       <% @hashtags.each_with_index do |hashtag, index| %>
-        <li class="<% if hashtag.title=='rails' %>active category<%end%>">
+        <!-- <li class="<% if hashtag.title=='rails' %>active category<%end%>"> -->
+        <li>
           <%= link_to "#{ hashtag.title.humanize }", "##{ hashtag.title }", data: { turbolinks: false } %>
         </li>
       <% end %>
@@ -31,9 +32,9 @@
   document.addEventListener('DOMContentLoaded',function(event){
     if(checkCurrentPage('home-index')){
       alertToast('Click Portfolios');
-      if(document.getElementsByClassName('active category')[0]){
-        document.getElementsByClassName('active category')[0].click()
-      }
+      // if(document.getElementsByClassName('active category')[0]){
+      //   document.getElementsByClassName('active category')[0].click()
+      // }
       // array with texts to type in typewriter
       // var dataText = [ "Amsterdam.", "Full Service.", "Webdevelopment.", "Wij zijn Occhio!"];
       var dataText = [ "Web / Web App / iOS Developer", "Freelancer Developer"];
