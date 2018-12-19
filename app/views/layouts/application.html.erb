@@ -40,8 +40,8 @@
     </div>
   </div>
 
-  <body id="body" style="visibility:hidden;" class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
-    
+  <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
+      
       <!-- Navbar and Header -->
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
         
@@ -121,12 +121,12 @@
         
         
       </ul>
-      <div data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">
-      <%= yield %>
+      <div id="body" style="visibility:hidden;" data-page="<%= @page_name ||= "#{controller_name}-#{action_name}" %>" class="page">
+        <%= yield %>
 
-      <!-- MODALS !! -->
-      <%= render 'layouts/modal/login', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
-      <%= render 'layouts/modal/contact' %>
+        <!-- MODALS !! -->
+        <%= render 'layouts/modal/login', resource: User.new, resource_name: :user, devise_mapping: Devise.mappings[:user] %>
+        <%= render 'layouts/modal/contact' %>
       </div>
     <!-- Core Javascript -->
     
