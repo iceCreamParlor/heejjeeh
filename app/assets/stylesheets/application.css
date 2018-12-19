@@ -66,14 +66,6 @@ img.cropper {
   background-color: #D7D7D7 !important;
 }
 
-.loading-text {
-  position: absolute;
-  top: 60%;
-  left: 45%;
-  z-index: 500;
-  color: #D7D7D7;
-}
-
 * {
   
   word-wrap: break-all !important;
