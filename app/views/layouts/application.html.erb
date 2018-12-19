@@ -28,6 +28,18 @@
 
   </head>
 
+  <div id="preloader" class="preloader-wrapper big active" style="position: absolute; left: 50%; top: 55%; margin-left: -29px; margin-top: -29px; z-index:500;">
+    <div class="spinner-layer spinner-blue-only">
+      <div class="circle-clipper left">
+        <div class="circle"></div>
+      </div><div class="gap-patch">
+        <div class="circle"></div>
+      </div><div class="circle-clipper right">
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+
   <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
     
       <!-- Navbar and Header -->
@@ -151,6 +163,11 @@
           Materialize.toast('하단의 사진을 클릭해 보세요.', 2000, 'blue', function(){isModalShowing = !isModalShowing})
         }
       }
+    </script>
+    <script>
+      document.addEventListener('turbolinks:load', function(){
+        document.getElementById('preloader').style.display="none";
+      })
     </script>
   </body>
 </html>
