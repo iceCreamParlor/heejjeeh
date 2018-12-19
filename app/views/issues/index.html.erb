@@ -16,7 +16,7 @@
   <div class="masonry">
     <% @issues.each do |issue| %>
     
-    <div class="item" id="card-<%= issue.id %>" style="max-height: 500px; overflow: scroll;">
+    <div class="item hoverable non-scrollbar" id="card-<%= issue.id %>" style="max-height: 500px; overflow: scroll;">
         <%= link_to issue_path(issue) do %>
         <h5 style="color: lightcoral;"><%= issue.title %></h5>
         <span class="black-text">

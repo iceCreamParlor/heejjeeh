@@ -121,3 +121,15 @@ input, select, textarea{
   height: 100%;
   vertical-align: middle;
 }
+img.hoverable {
+  transition: filter .5s ease-in-out;
+  -webkit-filter: grayscale(0%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+  filter: grayscale(0%); /* FF 35+ */
+}
+img.hoverable:hover {
+  -webkit-filter: grayscale(50%); /* Ch 23+, Saf 6.0+, BB 10.0+ */
+  filter: grayscale(50%); /* FF 35+ */
+}
+.non-scrollbar::-webkit-scrollbar { 
+  display: none; 
+}

@@ -28,7 +28,7 @@
 
   </head>
 
-  <body class="blue-grey darken-4">
+  <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
     
       <!-- Navbar and Header -->
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">

@@ -8,9 +8,9 @@
         <div class="gallery-curve-wrapper">
           <a class="gallery-cover gray">
             <% if portfolio.thumbnail.present? %>
-            <img class="responsive-img" src="<%= portfolio.thumbnail.html_safe %>" alt="placeholder">
+            <img class="responsive-img hoverable" src="<%= portfolio.thumbnail.html_safe %>" alt="placeholder">
             <% else %>
-            <img class="responsive-img" src="http://placehold.it/300x200" alt="placeholder">
+            <img class="responsive-img hoverable" src="http://placehold.it/300x200" alt="placeholder">
             <% end %>
           </a>
           <div class="gallery-body">
