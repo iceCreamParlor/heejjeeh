@@ -15,7 +15,22 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans|Caveat+Brush');
 
-.modal { width: 75% !important ; }
+
+
+@media only screen and (max-width: 320px) {
+  .modal { width: 75% !important ; }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 768px){
+  .modal { width: 75% !important ; }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1200px){
+  .modal { width: 27% !important ; }
+}
+@media only screen and (min-width: 1201px) {
+  .modal { width: 27% !important ; }
+}
 
 .modal-content {
   background-color: #2A373E;
@@ -23,6 +38,10 @@
 
 .fixed {
   position: fixed !important;
+}
+
+.float-right {
+  float: right;
 }
 
 div.note-editable {

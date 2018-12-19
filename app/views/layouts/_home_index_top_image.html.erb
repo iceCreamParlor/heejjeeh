@@ -1,5 +1,3 @@
-<%#= javascript_pack_tag 'home_index' %>
-
 <div class="nav-background">
   <!-- <img class="active" src="http://placehold.it/1400x600" alt="control room"> -->
 </div>
@@ -9,7 +7,6 @@
     <div class="tagline">Web / Web App / iOS Developer</div>
   </div>
 </div>
-
 <!-- Fixed Masonry Filters -->
 <div class="categories-wrapper">
   <div class="categories-container">
@@ -19,9 +16,9 @@
           <%= link_to 'All', '#all', data: { turbolinks: false } %>
         </li>
       <% end %>
+      
       <% @hashtags.each_with_index do |hashtag, index| %>
         <li class="<% if hashtag.title=='rails' %>active category<%end%>">
-
           <%= link_to "#{ hashtag.title.humanize }", "##{ hashtag.title }", data: { turbolinks: false } %>
         </li>
       <% end %>
@@ -29,15 +26,14 @@
   </div>
 </div>
 
+
 <script>
   document.addEventListener('DOMContentLoaded',function(event){
     if(checkCurrentPage('home-index')){
+      alertToast('Click Portfolios');
       if(document.getElementsByClassName('active category')[0]){
         document.getElementsByClassName('active category')[0].click()
       }
-      
-    
-
       // array with texts to type in typewriter
       // var dataText = [ "Amsterdam.", "Full Service.", "Webdevelopment.", "Wij zijn Occhio!"];
       var dataText = [ "Web / Web App / iOS Developer", "Freelancer Developer"];
