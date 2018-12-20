@@ -27,40 +27,9 @@
     <script src="/js/cropper/cropper.min.js"></script>
 
   </head>
-  <div id="preloader" style="position: fixed; left: 50%; top: 55%; margin-left: -29px; margin-top: -29px; z-index:500;">
-    <div class="preloader-wrapper big active" >
-      <div class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-red">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-yellow">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-
-        <div class="spinner-layer spinner-green">
+  <div id="preloader" style="position: fixed; left: 50%; top: 55%; margin-left: -15px; margin-top: -15px; z-index:500;">
+    <div class="preloader-wrapper small active">
+        <div class="spinner-layer">
           <div class="circle-clipper left">
             <div class="circle"></div>
           </div><div class="gap-patch">
@@ -70,8 +39,7 @@
           </div>
         </div>
       </div>
-    </div>
-    <p class="white-text" style="font-size: 12px;">Please Wait</p>
+    <p class="white-text" style="font-size: 12px;">로딩중..</p>
   </div>
 
   <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
