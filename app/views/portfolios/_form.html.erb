@@ -111,7 +111,7 @@ document.addEventListener('turbolinks:load', function(){
               contentType: false,
               processData: false,
               success: function (url) {
-                var image = $('<img style="width: 100%" class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
+                var image = $('<img class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
                 $('#editor').summernote("insertNode", image[0]);
                   
               },

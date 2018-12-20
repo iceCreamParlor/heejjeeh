@@ -72,7 +72,7 @@ document.addEventListener('turbolinks:load', function(){
               contentType: false,
               processData: false,
               success: function (url) {
-                var image = $('<img style="width: 100%" class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
+                var image = $('<img class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
                 $('#editor').summernote("insertNode", image[0]);
                   
               },
@@ -106,23 +106,23 @@ document.addEventListener('turbolinks:load', function(){
       e.preventDefault();
       let form = document.getElementById('form');
       let content = document.getElementsByClassName('note-editable')[0]
-      // let totalWidth = content.offsetWidth;
+      let totalWidth = content.offsetWidth;
       
-      // let imgs = content.getElementsByTagName('img');
+      let imgs = content.getElementsByTagName('img');
       
-      // for(var i = 0 ; i < imgs.length ; i++){
-      //   img = imgs[i];
+      for(var i = 0 ; i < imgs.length ; i++){
+        img = imgs[i];
         
-      //   if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
-      //     // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
-      //     let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
-      //     let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
-      //     let imgRatio = imgHeight / imgWidth;
-      //     let withEditorRatio = imgWidth / totalWidth * 100;
-      //     img.style.width = withEditorRatio + '%';
-      //     img.style.height = withEditorRatio * imgRatio + '%';
-      //   }
-      // }
+        if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
+          // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
+          let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
+          let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
+          let imgRatio = imgHeight / imgWidth;
+          let withEditorRatio = imgWidth / totalWidth * 100;
+          img.style.width = withEditorRatio + '%';
+          img.style.height = withEditorRatio * imgRatio + '%';
+        }
+      }
       
       document.getElementById('issue_content').value = content.innerHTML;
       let title_value = document.getElementById('issue_title').value;
