@@ -16,7 +16,7 @@
   <div class="masonry">
     <% @issues.each do |issue| %>
     
-    <div class="item hoverable non-scrollbar" id="card-<%= issue.id %>" style="max-height: 500px; overflow: scroll;">
+    <div class="item hoverable non-scrollbar" id="card-<%= issue.id %>" style="overflow: scroll;">
         <%= link_to issue_path(issue) do %>
         <p style="color: lightcoral; font-size: 18px;"><%= issue.title %></p>
         <span class="black-text">
@@ -38,6 +38,11 @@
   document.addEventListener('turbolinks:load', function(){
     if(checkCurrentPage('issues-index')){
       issues = JSON.parse(document.getElementById('issues-index').dataset.issues);
+      cards = document.getElementsByClassName('item hoverable');
+      for(var i = 0 ; i < cards.length ; i++) {
+        cards[i].style.maxHeight = 200 + Math.random() * 300 + 'px';
+      }
+      
     }
           
   })
