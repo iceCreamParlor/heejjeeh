@@ -15,14 +15,18 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Droid+Sans|Caveat+Brush');
 
-
-
 @media only screen and (max-width: 320px) {
   .modal { width: 75% !important ; }
+  .responsive-image {
+    width: 100% !important;
+  }
 }
 
 @media only screen and (min-width: 321px) and (max-width: 768px){
   .modal { width: 75% !important ; }
+  .responsive-image {
+    width: 100% !important;
+  }
 }
 
 @media only screen and (min-width: 769px) and (max-width: 1200px){
