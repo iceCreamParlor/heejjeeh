@@ -27,6 +27,7 @@
     <script src="/js/cropper/cropper.min.js"></script>
 
   </head>
+  <div id="wallpaper" style="position: absolute; width: 10000px; z-index: 499; height: 10000px; background-color:#2A373E"></div>
   <div id="preloader" style="position: fixed; left: 50%; top: 55%; margin-left: -15px; margin-top: -15px; z-index:500;">
     <div class="preloader-wrapper small active">
         <div class="spinner-layer">
@@ -169,6 +170,7 @@
     <script>
       document.addEventListener('turbolinks:load', function(){
         
+        document.getElementById('wallpaper').style.display="none";
         document.getElementById('preloader').style.display="none";
     
       })
