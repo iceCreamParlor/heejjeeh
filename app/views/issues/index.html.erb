@@ -19,9 +19,9 @@
     <div class="item hoverable non-scrollbar grey lighten-2" id="card-<%= issue.id %>" style="overflow: scroll;">
         <%= link_to issue_path(issue) do %>
         <p style="color: #1D262A; font-size: 20px; font-weight: 800 !important;"><%= issue.title %></p>
-        <div class="black-text">
+        <span class="black-text">
           <%= issue.content.html_safe %>
-        </div>
+        </span>
         <% end %>
     </div>
     
@@ -67,12 +67,12 @@
 
 
 h1 {
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 p {
 
-  margin-bottom:60px;
+  /* margin-bottom:60px; */
 }
 
 h4{
