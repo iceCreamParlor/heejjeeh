@@ -11,11 +11,9 @@
 <div class="categories-wrapper">
   <div class="categories-container">
     <ul class="categories container">
-      <% if false %>
-        <li class="active">
-          <%= link_to 'All', '#all', data: { turbolinks: false } %>
-        </li>
-      <% end %>
+      <li class="active">
+        <%= link_to 'All', '#all', data: { turbolinks: false } %>
+      </li>
       
       <% @hashtags.each_with_index do |hashtag, index| %>
         <!-- <li class="<% if hashtag.title=='rails' %>active category<%end%>"> -->
