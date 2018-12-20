@@ -3,6 +3,7 @@ class PortfoliosController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
   before_action :set_portfolio, only: [:show, :edit, :update, :destroy]
   before_action :disable_carousel
+  skip_before_action :verify_authenticity_token, only: [:image_upload]
 
   # GET /portfolios
   # GET /portfolios.json
@@ -74,6 +75,19 @@ class PortfoliosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to '/', notice: 'Portfolio was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def image_upload
+    image_binary = params[:file]
+    file_name = "#{SecureRandom.urlsafe_base64}.png"
+
+    File.open(Rails.root.join('public','uploads', file_name), 'wb') do |f|
+      if f.write(image_binary.read)
+        render :json => {
+          file_name: file_name
+        } 
+      end 
     end
   end
 

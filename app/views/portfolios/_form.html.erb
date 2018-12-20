@@ -92,6 +92,41 @@ document.addEventListener('turbolinks:load', function(){
           ['float', ['floatLeft', 'floatRight', 'floatNone']],
           ['remove', ['removeMedia']]
         ],
+        
+        onImageUpload: function (files) {
+          var $files = $(files);
+          var $this = $(this);
+          console.log($this)
+          $files.each(function () {
+            var file = this;
+            
+            var data = new FormData();
+            data.append("file", file);
+
+            $.ajax({
+              data: data,
+              type: "POST",
+              url: "/portfolios/image_upload/",
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (url) {
+                var image = $('<img style="width: 100%" class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
+                $('#editor').summernote("insertNode", image[0]);
+                  
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  if (xhr.responseText) {
+                      toastr.error(xhr.responseText, 'Inconceivable!')
+                  } else {
+                      console.error("<div>Http status: " + xhr.status + " " + xhr.statusText + "</div>" + "<div>ajaxOptions: " + ajaxOptions + "</div>"
+                          + "<div>thrownError: " + thrownError + "</div>");
+                  }
+              }
+            });
+          });
+        }
+        
     });
 
     // button 들의 action 을 없앤다. (이걸 지우면, 버튼을 눌렀을 때 form 이 submit 되는 현상 발생)
@@ -127,9 +162,38 @@ document.addEventListener('turbolinks:load', function(){
                 });
                 $('#btnCrop').click(function() {
                     // Get a string base 64 data url
-                    var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png"); 
-                    document.getElementById('portfolio_thumbnail').value = croppedImageDataURL;
-                    $result.append( $('<img>').attr('src', croppedImageDataURL) );
+                    console.log(canvas)
+                    var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toBlob(function (blob) {
+                      var data = new FormData();
+
+                      data.append('file', blob);
+
+                      $.ajax({
+                        data: data,
+                        type: "POST",
+                        url: "/portfolios/image_upload/",
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                          console.log(response)     
+                          document.getElementById('portfolio_thumbnail').value = '/uploads/' + response.file_name
+                          alert("Image Upload Success!")
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            if (xhr.responseText) {
+                                toastr.error(xhr.responseText, 'Inconceivable!')
+                            } else {
+                                console.error("<div>Http status: " + xhr.status + " " + xhr.statusText + "</div>" + "<div>ajaxOptions: " + ajaxOptions + "</div>"
+                                    + "<div>thrownError: " + thrownError + "</div>");
+                            }
+                        }
+                      });
+
+
+                    });
+            
+                    
                 });
                 $('#btnRestore').click(function() {
                   canvas.cropper('reset');
@@ -185,11 +249,6 @@ document.addEventListener('turbolinks:load', function(){
     
   })
 
-  
-
-
 })
-
-
 
 </script> 

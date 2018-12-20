@@ -54,6 +54,39 @@ document.addEventListener('turbolinks:load', function(){
           ['float', ['floatLeft', 'floatRight', 'floatNone']],
           ['remove', ['removeMedia']]
         ],
+        onImageUpload: function (files) {
+          var $files = $(files);
+          var $this = $(this);
+          console.log($this)
+          $files.each(function () {
+            var file = this;
+            
+            var data = new FormData();
+            data.append("file", file);
+
+            $.ajax({
+              data: data,
+              type: "POST",
+              url: "/portfolios/image_upload/",
+              cache: false,
+              contentType: false,
+              processData: false,
+              success: function (url) {
+                var image = $('<img style="width: 100%" class="responsive-image" />').attr('src', '/uploads/' + url.file_name);
+                $('#editor').summernote("insertNode", image[0]);
+                  
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  if (xhr.responseText) {
+                      toastr.error(xhr.responseText, 'Inconceivable!')
+                  } else {
+                      console.error("<div>Http status: " + xhr.status + " " + xhr.statusText + "</div>" + "<div>ajaxOptions: " + ajaxOptions + "</div>"
+                          + "<div>thrownError: " + thrownError + "</div>");
+                  }
+              }
+            });
+          });
+        }
     });
 
     // button 들의 action 을 없앤다. (이걸 지우면, 버튼을 눌렀을 때 form 이 submit 되는 현상 발생)
@@ -73,23 +106,23 @@ document.addEventListener('turbolinks:load', function(){
       e.preventDefault();
       let form = document.getElementById('form');
       let content = document.getElementsByClassName('note-editable')[0]
-      let totalWidth = content.offsetWidth;
+      // let totalWidth = content.offsetWidth;
       
-      let imgs = content.getElementsByTagName('img');
+      // let imgs = content.getElementsByTagName('img');
       
-      for(var i = 0 ; i < imgs.length ; i++){
-        img = imgs[i];
+      // for(var i = 0 ; i < imgs.length ; i++){
+      //   img = imgs[i];
         
-        if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
-          // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
-          let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
-          let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
-          let imgRatio = imgHeight / imgWidth;
-          let withEditorRatio = imgWidth / totalWidth * 100;
-          img.style.width = withEditorRatio + '%';
-          img.style.height = withEditorRatio * imgRatio + '%';
-        }
-      }
+      //   if(img.style.height.indexOf('px') != -1 || img.style.width.indexOf('px') != -1 ){
+      //     // 새로 추가된 사진일 경우에만 px => % 로 크기 조정한다.
+      //     let imgHeight = parseFloat(imgs[i].style.height.replace('px', ''));   
+      //     let imgWidth = parseFloat(imgs[i].style.width.replace('px', ''));
+      //     let imgRatio = imgHeight / imgWidth;
+      //     let withEditorRatio = imgWidth / totalWidth * 100;
+      //     img.style.width = withEditorRatio + '%';
+      //     img.style.height = withEditorRatio * imgRatio + '%';
+      //   }
+      // }
       
       document.getElementById('issue_content').value = content.innerHTML;
       let title_value = document.getElementById('issue_title').value;
