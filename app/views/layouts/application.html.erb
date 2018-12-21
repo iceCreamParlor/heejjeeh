@@ -45,40 +45,41 @@
   <body class="blue-grey darken-4" <% if controller_name=="home" && action_name == "index" %>onscroll="homeIndexScrollDown()" <% end %>>
       
       <!-- Navbar and Header -->
-      <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
+      <nav class="adjusted-min-height nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
         
         <div class="nav-wrapper container">
           <%= link_to '/', class: "brand-logo", style: "font-size: 20px;" ,data: { turbolinks: false }  do %>
-            <i class="material-icons">laptop_mac</i>
+            heej
+            <i class="material-icons adjusted-min-height">laptop_mac</i>
           <% end %>
           <!-- <a href="/" class="brand-logo"><i class="material-icons">camera</i>imheej</a> -->
-          <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul class="right hide-on-med-and-down">
-            <li>
+          <a href="#" style="margin-left: 0px;" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons adjusted-min-height">menu</i></a>
+          <ul class="right hide-on-med-and-down adjusted-min-height">
+            <li class="no-vertical-margin">
               <%= link_to 'Home', '/', data: { turbolinks: false } %>
             </li>
             
-            <li>
+            <li class="no-vertical-margin">
               <%= link_to 'Issues', issues_path, data: { turbolinks: false } %>
             </li>
-            <li>
+            <li class="no-vertical-margin">
               <%= link_to 'Portfolio', portfolios_path, data: { turbolinks: false } %>
             </li>
-            <li>
+            <li class="no-vertical-margin">
               <%= link_to 'Profile', profiles_path, data: { turbolinks: false } %>
             </li>
-            <li>
+            <li class="no-vertical-margin">
               <%= link_to 'Contact', '#contact', class: 'modal-trigger' %>
             </li>
-            <li>
+            <li class="no-vertical-margin">
             <% if user_signed_in? %>
               <%= link_to 'Logout', destroy_user_session_path, method: :delete %> 
             <% else %>
               <%= link_to 'Login', '#login', class: 'modal-trigger' %>
             <% end %>
-            </li>
+            </li class="no-vertical-margin">
             <% if user_signed_in? && check_authority %>
-            <li>
+            <li class="no-vertical-margin">
               <a class='dropdown-trigger' href='#' data-target='feature-dropdown'>Post<i class="material-icons right">arrow_drop_down</i></a>
             </li>
             <% end %>
