@@ -1,12 +1,12 @@
 <%= content_tag "div", id:"issues-index", data: { issues: @issues.to_json} do%>
 <div class="container">
-  <h1 class="white-text">Issues</h1>
+  <h4 class="white-text">Issues</h4>
   <% if user_signed_in? && check_authority %>
     <%= link_to new_issue_path do %>
       <button type="button">New Issue</button>
     <% end %>
   <% end %>
-  <div class="input-field col s6 white-text">
+  <div class="input-field col s6 white-text" style="margin: 1.5em;">
     <i class="material-icons prefix">search</i>
     <input id="searchIssue" onkeyup="searchIssue()">
   </div>
