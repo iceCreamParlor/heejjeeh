@@ -47,9 +47,9 @@
       <!-- Navbar and Header -->
       <nav class="nav-extended <% if @disable_carousel.nil? && controller_name != "sessions" %> nav-full-header <% end %> z-depth-0 blue-grey darken-3">
         
-        <div style="min-height: 50px;" class="nav-wrapper container">
+        <div style="min-height: 50px; line-height: 50px; text-align: center;" class="nav-wrapper container">
           <%= link_to '/', class: "brand-logo", style: "font-size: 20px;" ,data: { turbolinks: false }  do %>
-            <span class="adjusted-min-height">heej</span>
+            <span style="font-size: 18px;" class="adjusted-min-height">heej</span>
             <i class="material-icons adjusted-min-height">laptop_mac</i>
           <% end %>
           <!-- <a href="/" class="brand-logo"><i class="material-icons">camera</i>imheej</a> -->
