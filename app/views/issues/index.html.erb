@@ -49,12 +49,12 @@
   
   function searchIssue(){
 
-    let inputField = document.getElementById('searchIssue').value;
+    let inputField = document.getElementById('searchIssue').value.toLowerCase();
 
     for(var i = 0 ; i < issues.length ; i++){
       $(('#card-' + issues[i].id)).show();
 
-      if( issues[i].title.indexOf(inputField) == -1 ){
+      if( issues[i].title.indexOf(inputField.toLowerCase()) == -1 ){
         $(('#card-' + issues[i].id)).hide();
 
       }
