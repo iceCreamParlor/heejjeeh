@@ -147,3 +147,7 @@ img.hoverable:hover {
   margin-top: 7px !important;
   margin-bottom: 7px !important;
 }
+
+.brand-logo {
+  height: 50px;
+}
