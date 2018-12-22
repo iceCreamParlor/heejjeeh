@@ -11,31 +11,39 @@
     </div>
     <% end %>
   </div>
-  <div class="row">
-    <% @portfolios.each do |portfolio| %>
-    <%= link_to portfolio_path(portfolio), data: { turbolinks: false } do %>
-    <div class="col s12 m4 l4">
-      
-        <div class="card" id="portfolio-<%= portfolio.id %>">
-          <div class="card-image">
-            <img src="<%= portfolio.thumbnail %>" class="hoverable">
-            <!-- <span class="card-title"><%= portfolio.title %></span> -->
-            <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+  
+    <% @portfolios.each_with_index do |portfolio, index| %>
+    
+    <% if index % 3 == 0 %>
+    <div class="row">
+    <% end %>
+
+      <%= link_to portfolio_path(portfolio), data: { turbolinks: false } do %>
+      <div class="col s12 m4 l4">
+        
+          <div class="card" id="portfolio-<%= portfolio.id %>">
+            <div class="card-image">
+              <img src="<%= portfolio.thumbnail %>" class="hoverable">
+              <!-- <span class="card-title"><%= portfolio.title %></span> -->
+              <!-- <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+            </div>
+            <div class="card-content">
+              <h4 class="black-text"><%= portfolio.title %></h4>
+              <% portfolio.hashtags.each do |hashtag| %>
+                <div class="chip" >
+                  <%= hashtag.title %>
+                </div>
+              <% end %>
+            </div>
           </div>
-          <div class="card-content">
-            <h4 class="black-text"><%= portfolio.title %></h4>
-            <% portfolio.hashtags.each do |hashtag| %>
-              <div class="chip" >
-                <%= hashtag.title %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      
+      </div>
+      <% end %>
+
+    <% if index % 3 == 2 %>
     </div>
     <% end %>
     <% end %>
-  </div>
+  
 </div>
 <% end %>
 
