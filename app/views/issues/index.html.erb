@@ -16,7 +16,7 @@
   <div class="masonry">
     <% @issues.each do |issue| %>
     
-    <div class="item hoverable non-scrollbar grey lighten-2" id="card-<%= issue.id %>" style="overflow: scroll;">
+    <div class="item hoverable non-scrollbar" id="card-<%= issue.id %>" style="overflow: scroll;">
         <%= link_to issue_path(issue) do %>
         <p style="color: #1D262A; font-size: 20px; font-weight: 800 !important;"><%= issue.title %></p>
         <span class="black-text">
@@ -34,17 +34,23 @@
 
 <script>
   var issues;
+  let cardBgColors = ["#FDF4A7", "#BBF2FD", "#F7C9C8", "#EEEEEE"];
+  let colorCount = cardBgColors.length;
+
 
   document.addEventListener('turbolinks:load', function(){
     if(checkCurrentPage('issues-index')){
       issues = JSON.parse(document.getElementById('issues-index').dataset.issues);
       cards = document.getElementsByClassName('item hoverable');
+      
       for(var i = 0 ; i < cards.length ; i++) {
+        colorIndex = Math.floor(Math.random() * colorCount);
         cards[i].style.maxHeight = 200 + Math.random() * 300 + 'px';
+        cards[i].style.backgroundColor = cardBgColors[colorIndex];
       }
       
     }
-          
+
   })
   
   function searchIssue(){
