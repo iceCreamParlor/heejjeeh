@@ -6,7 +6,7 @@ class IssuesController < InheritedResources::Base
   before_action :disable_carousel
 
   def index
-    @issues = Issue.all
+    @issues = Issue.all.order(created_at: :desc)
   end
 
   
