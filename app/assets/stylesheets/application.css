@@ -156,6 +156,6 @@ img.hoverable:hover {
 #plusfriend-chat-button{
   position: fixed;
   right: 5%;
-  bottom: 1%;
+  bottom: 0%;
   z-index: 500;
 }
